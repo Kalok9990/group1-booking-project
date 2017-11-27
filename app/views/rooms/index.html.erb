@@ -14,13 +14,13 @@
       <% 17.times do |row| %>
         <tr>
           <% if i % 1 ==0 %>
-            <td class="timeCell"><%= i %></td>
+            <td class="timeCell"><%= number_with_precision i, :precision => 2 %></td>
             <% @rooms.each do |room| %>
               <td class="roomCell" id="<%= room.name %>" data-num="<%= i %>">-</td>
             <% end %>
             <% i += 0.30 %>
           <% else %>
-          <td class="timeCell"> <%= i %></td>
+          <td class="timeCell"> <%=  number_with_precision i, :precision => 2  %></td>
           <% @rooms.each do |room| %>
             <td class="roomCell" id="<%= room.name %>" data-num="<%= i %>">-</td>
           <% end %>
