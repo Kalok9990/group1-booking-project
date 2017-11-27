@@ -7,8 +7,7 @@
     <tr>
       <th>Time</th>
       <% @rooms.each do |room| %>
-          <th class="Room name"><%= room.name %></th>
-          <td><%= link_to 'Show', room %></td>
+          <th class="Room name"><%= link_to room.name, room %></th>
       <% end %>
     </tr>
       <% i = 9.00 %>
