@@ -18,18 +18,22 @@
   </thead>
 
   <tbody>
-    <%= @roombookings = @room.bookings %>
-    <% @roombookings.each do |roombooking|  %>
+    
+    <% @room.bookings.each do |booking|  %>
     <tr>
-      <td><%= roombooking.description  %></td>
-      <td><%= roombooking.date_in  %></td>
-      <td><%= roombooking.date_out  %></td>
-      
-    </tr>
-   <% end %>
+      <td><%= booking.description  %></td>
+      <td><%= booking.date_in  %></td>
+      <td><%= booking.date_out  %></td>
+      </tr>
+
   </tbody>
 </table>
 
 <br>
+
+<%= link_to 'Show', booking %>
+<%= link_to 'Edit', edit_booking_path(booking) %>
+<%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
 
 <%= link_to 'New Booking', new_booking_path %>
