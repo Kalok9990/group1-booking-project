@@ -8,22 +8,21 @@
       <th>Time</th>
       <% @rooms.each do |room| %>
           <th class="Room name"><%= room.name %></th>
-          <td><%= link_to 'Show', room %></td>
       <% end %>
     </tr>
       <% i = 9.00 %>
       <% 17.times do |row| %>
         <tr>
           <% if i % 1 ==0 %>
-            <td class="timeCell"><%= i %></td>
+            <td class="timeCell"><%= number_with_precision i, :precision =>2 %></td>
             <% @rooms.each do |room| %>
-              <td class="roomCell" id="<%= room.name %>" data-num="<%= i %>">-</td>
+              <td class="roomCell" id="<%= room.name %>" data-num="<%= number_with_precision i, :precision =>2  %>">-</td>
             <% end %>
             <% i += 0.30 %>
           <% else %>
-          <td class="timeCell"> <%= i %></td>
+          <td class="timeCell"> <%= number_with_precision i, :precision =>2 %></td>
           <% @rooms.each do |room| %>
-            <td class="roomCell" id="<%= room.name %>" data-num="<%= i %>">-</td>
+            <td class="roomCell" id="<%= room.name %>" data-num="<%= number_with_precision i, :precision =>2  %>">-</td>
           <% end %>
             <% i += 0.70 %>
         <% end %>
