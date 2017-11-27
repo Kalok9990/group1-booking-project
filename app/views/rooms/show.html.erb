@@ -1,11 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+
   <strong>Name:</strong>
   <%= @room.name %>
-  <%= @room.bookings %>
-</p>
 
-<%= link_to 'Destroy', @room, method: :delete, data: { confirm: 'Are you sure?' } %>
-<%= link_to 'Edit', edit_room_path(@room) %> |
-<%= link_to 'Back', rooms_path %>
+
+<h1>Bookings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Date in</th>
+      <th>Date out</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= @roombookings = @room.bookings %>
+    <% @roombookings.each do |roombooking|  %>
+    <tr>
+      <td><%= roombooking.description  %></td>
+      <td><%= roombooking.date_in  %></td>
+      <td><%= roombooking.date_out  %></td>
+      
+    </tr>
+   <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Booking', new_booking_path %>
