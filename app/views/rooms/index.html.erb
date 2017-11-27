@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <% start_date = params.fetch(:start_date, Date.today).to_date%>
-<% date_range = (start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).to_a %>
+<% date_range = (start_date..(start_date)).to_a %>
+<%= link_to "Previous day", start_date: date_range.first - 1.day %>
+<%= link_to "Next Day", start_date:date_range.last + 1.day %>
 
 
 <table>
@@ -9,6 +11,12 @@
     <tr>
       <% date_range.slice(0,7).each do |day| %>
       <th><%= I18n.t("date.abbr_day_names")[day.wday] %></th>
+      <th><% date_range.each_slice(7) do |week|  %>
+          <% week.each do |day| %>
+            <%= day %>
+          <% end %>
+        <% end %>
+      </th>
       <% end %>
     </tr>
   </thead>
@@ -18,9 +26,10 @@
     <tr>
       <% week.each do |day| %>
       <td>
-      <%= day %>
       <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
         <div><%= link_to meeting.description, meeting %></div>
+        <div><%= meeting.date_in.strftime("%I.%M") %></div>
+        <div><%= meeting.date_out.strftime("%I.%M") %></div>
       <% end %>
     </td>
     <% end %>
@@ -44,6 +53,7 @@
           <% if i % 1 ==0 %>
             <td class="timeCell"><%= number_with_precision i, :precision => 2 %></td>
             <% @rooms.each do |room| %>
+              
               <td class="roomCell" id="<%= room.name %>" data-num="<%= number_with_precision i, :precision =>2  %>">-</td>
             <% end %>
             <% i += 0.30 %>
