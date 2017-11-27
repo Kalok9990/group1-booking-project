@@ -46,9 +46,9 @@ a{
 
 
 .btn-info {
-  color: black;
+  color: white;
   background-color: silver;
-  border-color: #46b8da;
+  border-color: black;
 }
 
 h1 {
@@ -57,4 +57,20 @@ h1 {
   border-radius: 9px;
   text-align: center;
   color: white;
+  border: 1px solid black;
+}
+
+form{
+  background-color: silver;
+  text-align: center;
+  border-radius: 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 15%;
+  border: 1px solid black;
+}
+
+.backbutton{
+  margin-left: 50%;
+  margin-top: 64px;
 }
