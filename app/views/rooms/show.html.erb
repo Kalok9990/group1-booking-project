@@ -3,6 +3,7 @@
 <p>
   <strong>Name:</strong>
   <%= @room.name %>
+  <%= @room.bookings %>
 </p>
 
 <%= link_to 'Destroy', @room, method: :delete, data: { confirm: 'Are you sure?' } %>
