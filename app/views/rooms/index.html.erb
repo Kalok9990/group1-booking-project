@@ -34,7 +34,6 @@
 </table>
 
 <br>
-<a href="/rooms/new" class="btn btn-info" role="button" >New Room2</a>
-<a href="/bookings/new" class="btn btn-info" role="button" >New Booking 2</a>
+
 <%= link_to 'New Room', new_room_path, :class => "btn btn-info", :role => "button" %>
-<%= link_to 'New Booking', new_booking_path, id: "form"%>
+<%= link_to 'New Booking', new_booking_path, :class => "btn btn-info", :role => "button", id: "form"%>
