@@ -12,22 +12,20 @@
       <% end %>
     </tr>
       <% i = 9.00 %>
-      <% id = 1 %>
       <% 17.times do |row| %>
-        <tr class="hour <% id.to_s %>">
+        <tr>
           <% if i % 1 ==0 %>
             <td class="timeCell"><%= i %></td>
-            <% i += 0.30 %>
-            <% id +=0.5 %>
             <% @rooms.each do |room| %>
-              <td id="<%= room.name %>">-</td>
+              <td class="roomCell" id="<%= room.name %>" data-num="<%= i %>">-</td>
             <% end %>
+            <% i += 0.30 %>
           <% else %>
           <td class="timeCell"> <%= i %></td>
-          <% i += 0.70 %>
           <% @rooms.each do |room| %>
-            <td id="<%= room.name %>">-</td>
+            <td class="roomCell" id="<%= room.name %>" data-num="<%= i %>">-</td>
           <% end %>
+            <% i += 0.70 %>
         <% end %>
         </tr>
       <% end %>
