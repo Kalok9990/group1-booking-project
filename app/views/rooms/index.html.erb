@@ -33,7 +33,9 @@
   </thead>
 </table>
 
+<%= render '/bookings/form', booking: @booking %>
+
 <br>
 
 <%= link_to 'New Room', new_room_path %>
-<%= link_to 'New Booking', new_booking_path, id: "form"%>
+<%= link_to 'New Booking', new_booking_path, id: "formbtn"%>
