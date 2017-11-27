@@ -20,7 +20,7 @@
       <td>
       <%= day %>
       <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
-        <div><%= meeting.description %></div>
+        <div><%= link_to meeting.description, meeting %></div>
       <% end %>
     </td>
     <% end %>
