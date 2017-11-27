@@ -16,23 +16,21 @@
 
  th {
    width: 100px;
-   /*border: 5px solid black;*/
+   border: 1px solid black;
  }
 
  td {
    border: 1px solid black;
  }
 
-.roomCell {
-
-}
 
 tr{
-  background-color: red;
+  background-color: white;
 }
 
 table{
   margin: auto;
+  margin-top: 41px;
 }
 
 body {
@@ -51,4 +49,12 @@ a{
   color: black;
   background-color: silver;
   border-color: #46b8da;
+}
+
+h1 {
+  font-size: 36px;
+  background-color: silver;
+  border-radius: 9px;
+  text-align: center;
+  color: white;
 }
