@@ -14,6 +14,7 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
+    @rooms = Room.all
     @booking = Booking.new
   end
 
@@ -25,7 +26,7 @@ class BookingsController < ApplicationController
   # POST /bookings.json
   def create
     @booking = Booking.new(booking_params)
-
+    # @rooms = Room.all
 
     respond_to do |format|
       if @booking.save
@@ -70,6 +71,6 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:scaffold_controller, :description, :date_in, :date_out)
+      params.require(:booking).permit(:scaffold_controller, :description, :date_in, :date_out, :room_id)
     end
 end
