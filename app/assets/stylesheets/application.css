@@ -34,11 +34,16 @@ body {
   padding-left: 20px;
   padding-right: 20px;
 }
-/*h1{
-  margin-left: 20px;
-}*/
+
 
 a{
   color: blue;
   text-decoration: none;
+}
+
+
+.btn-info {
+  color: black;
+  background-color: #F44336;
+  border-color: #46b8da;
 }
