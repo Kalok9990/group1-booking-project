@@ -12,18 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :scaffold_controller %>
-    <%= form.text_field :scaffold_controller, id: :booking_scaffold_controller %>
-  </div>
-
-  <div class="field">
     <%= form.label :description %>
-    <%= form.text_field :description, id: :booking_description %>
+    <%= form.text_area :description, id: :booking_description %>
   </div>
 
   <div class="field">
     <%= form.label :date_in %>
-    <%= form.text_field :date_in, id: :booking_date_in %>
+    <%= form.datetime_select :date_in, id: :booking_date_in %>
   </div>
 
   <div class="field">
