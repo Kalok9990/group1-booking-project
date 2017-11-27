@@ -14,6 +14,7 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
+    @rooms = Room.all
     @booking = Booking.new
   end
 
