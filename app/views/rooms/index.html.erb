@@ -1,18 +1,19 @@
 <p id="notice"><%= notice %></p>
+
+<h1>Rooms</h1>
 <% @rooms.each do |room| %>
   <p class="nameOfRoomInShow">
-    <strong>Room name:</strong>
-    <%= room.name %>
+    <strong><%= room.name %></strong>
   </p>
 
-  <h3>Booking</h3>
+  <h3>Bookings</h3>
 
   <table>
      <thead>
        <tr>
          <th>Description</th>
-         <th>Date in</th>
-         <th>Date out</th>
+         <th>Start Time</th>
+         <th>End Time</th>
 
        </tr>
      </thead>
