@@ -3,8 +3,30 @@
 <p class="nameOfRoomInShow">
   <strong>Room name:</strong>
   <%= @room.name %>
-</p>
+ </p>
 
-<%= link_to 'Destroy', @room, method: :delete, data: { confirm: 'Are you sure?' } %>
-<%= link_to 'Edit', edit_room_path(@room) %> |
-<%= link_to 'Back', rooms_path %>
+<h3>Bookings</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Date in</th>
+      <th>Date out</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @room.bookings.each do |booking|  %>
+      <tr>
+        <td><%= booking.description  %></td>
+        <td><%= booking.date_in  %></td>
+        <td><%= booking.date_out  %></td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Booking', new_booking_path %>
+<%= link_to 'Back to rooms', rooms_path %>
