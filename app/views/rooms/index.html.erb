@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Rooms</h1>
+<h1 id="roomsIndexHeader">Rooms</h1>
 
 <table>
   <thead>
@@ -35,5 +35,5 @@
 
 <br>
 
-<%= link_to 'New Room', new_room_path %>
-<%= link_to 'New Booking', new_booking_path, id: "form"%>
+<%= link_to 'New Room', new_room_path, :class => "btn btn-info", :role => "button" %>
+<%= link_to 'New Booking', new_booking_path, :class => "btn btn-info", :role => "button", id: "form"%>
