@@ -7,6 +7,7 @@
 <%= link_to "Previous day", start_date: date_range.first - 1.day %>
 <%= link_to "Next Day", start_date:date_range.last + 1.day %>
 
+<!-- makes table to show day view -->
 <table>
   <thead>
     <tr>
@@ -124,6 +125,10 @@
     </tr>
   </thead>
 </table>
+
+
+<!-- new booking form -->
+<%= render '/bookings/form', booking: @booking %>
 
 <br>
 

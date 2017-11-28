@@ -5,7 +5,11 @@ class RoomsController < ApplicationController
   # GET /rooms.json
   def index
     @rooms = Room.all
+<<<<<<< HEAD
     @bookings = Booking.all
+=======
+    @booking = Booking.new
+>>>>>>> dev
   end
 
   # GET /rooms/1

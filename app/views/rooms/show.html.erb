@@ -5,6 +5,30 @@
   <%= @room.name %>
 </p>
 
-<%= link_to 'Destroy', @room, method: :delete, data: { confirm: 'Are you sure?' } %>
+<h3>Booking</h3>
+
+<table>
+   <thead>
+     <tr>
+       <th>Description</th>
+       <th>Date in</th>
+       <th>Date out</th>
+
+     </tr>
+   </thead>
+
+   <!-- loops through to show booking information for the room -->
+   <tbody>
+     <% @room.bookings.each do |booking|  %>
+       <tr>
+         <td><%= booking.description  %></td>
+         <td><%= booking.date_in  %></td>
+         <td><%= booking.date_out  %></td>
+       </tr>
+       <% end %>
+   </tbody>
+</table>
+
+<%= link_to 'Destroy', @room, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Edit', edit_room_path(@room) %> |
 <%= link_to 'Back', rooms_path %>
