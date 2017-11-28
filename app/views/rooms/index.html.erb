@@ -20,7 +20,7 @@
 
      <!-- loops through to show booking information for the room -->
      <tbody>
-       <% room.bookings.each do |booking|  %>
+       <% room.bookings.order(date_in: :ASC).each do |booking|  %>
          <tr>
            <td><%= booking.description  %></td>
            <td><%= booking.date_in  %></td>
