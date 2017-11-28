@@ -57,9 +57,10 @@ class BookingsController < ApplicationController
   # DELETE /bookings/1
   # DELETE /bookings/1.json
   def destroy
+    @room = Room.find(params[:id])
     @booking.destroy
     respond_to do |format|
-      format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
+      format.html { redirect_to '/rooms', notice: 'Booking was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
