@@ -21,6 +21,7 @@
  }
 
  td {
+   width: 150px;
    border: 1px solid black;
  }
 
@@ -95,4 +96,13 @@ form{
   margin-top: 17%;
 }
 
-#
+footer{
+  position: sticky;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.field{
+  margin-top: 20px;
+}

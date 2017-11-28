@@ -39,9 +39,10 @@
   </table>
 <% end %>
 
-<!-- new booking form -->
-<%= render '/bookings/form', booking: @booking %>
-
 <br>
 
 <%= link_to 'New Room', new_room_path, :class => "btn btn-info", :role => "button" %>
+<footer>
+  <!-- new booking form -->
+  <%= render '/bookings/form', booking: @booking %>
+</footer>
