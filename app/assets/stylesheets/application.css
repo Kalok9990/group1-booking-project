@@ -86,7 +86,7 @@ form{
   border-radius: 12px;
   border: 1px solid black;
   padding-left: 30px;
-  margin-top: 49px;
+  margin-top: 35px;
 }
 
 .successfulBooking{
@@ -96,7 +96,6 @@ form{
   border-radius: 12px;
   margin-top: 17%;
 }
-<<<<<<< HEAD
 
 footer{
   position: sticky;
@@ -108,5 +107,3 @@ footer{
 .field{
   margin-top: 20px;
 }
-=======
->>>>>>> dev
