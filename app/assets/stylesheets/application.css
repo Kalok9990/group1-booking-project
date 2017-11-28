@@ -21,6 +21,7 @@
  }
 
  td {
+   width: 150px;
    border: 1px solid black;
  }
 
@@ -81,10 +82,11 @@ form{
 .nameOfRoomInShow{
   color: white;
   background-color: silver;
-  font-size: 36px;
+  font-size: 27px;
   border-radius: 12px;
   border: 1px solid black;
   padding-left: 30px;
+  margin-top: 35px;
 }
 
 .successfulBooking{
@@ -97,4 +99,15 @@ form{
 
 #done {
   background-color: rgba(217,217,217,0.7);
+}
+
+footer{
+  position: sticky;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.field{
+  margin-top: 20px;
 }
