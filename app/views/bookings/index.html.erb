@@ -1,10 +1,11 @@
 <p id="notice"><%= notice %></p>
-
+<!-- The header for the bookings -->
 <h1>Bookings</h1>
 
 <table>
   <thead>
     <tr>
+      <!--The column headers for the table  -->
       <th>Description</th>
       <th>Date in</th>
       <th>Date out</th>
@@ -13,6 +14,7 @@
   </thead>
 
   <tbody>
+    <!--ruby loop that prints each booking into a table  -->
     <% @bookings.each do |booking| %>
       <tr>
         <td><%= booking.description %></td>
@@ -27,5 +29,6 @@
 </table>
 
 <br>
-
+<!-- imported bootstrap class to make the link into a button -->
 <%= link_to 'New Booking', new_booking_path, :class => "btn btn-info", :role => "button" %>
+<%= link_to 'Back to rooms', rooms_path, :class => "btn btn-info", :role => "button" %>
