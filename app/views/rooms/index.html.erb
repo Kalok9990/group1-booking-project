@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Rooms</h1>
+<h1 id="roomsIndexHeader">Rooms</h1>
 
 <!-- makes table to show day view -->
 <table>
@@ -38,5 +38,10 @@
 
 <br>
 
+<<<<<<< HEAD
 <%= link_to 'New Room', new_room_path %>
 <%= link_to 'New Booking', new_booking_path, id: "formbtn"%>
+=======
+<%= link_to 'New Room', new_room_path, :class => "btn btn-info", :role => "button" %>
+<%= link_to 'New Booking', new_booking_path, :class => "btn btn-info", :role => "button", id: "form"%>
+>>>>>>> dev
