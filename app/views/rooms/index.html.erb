@@ -26,13 +26,6 @@
   <% @date_range.each_slice(7) do |week| %>
     <tr>
       <% week.each do |day| %>
-      <td>
-      <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
-        <div><%= link_to meeting.description, meeting %></div>
-        <div><%= meeting.date_in.strftime("%H.%M") %></div>
-        <div><%= meeting.date_out.strftime("%H.%M") %></div>
-      <% end %>
-    </td>
     <% end %>
     </tr>
     <% end %>
@@ -48,10 +41,10 @@
       <th>Time</th>
       <!-- Creates the columns for each room -->
       <% @rooms.each do |room| %>
-          <th class="Room name"><%= link_to room.name, room %></th>
+          <th class="<%= room.name %>"><%= link_to room.name, room %></th>
       <% end %>
     </tr>
-
+      <% roomName = '' %>
       <% inbetween =  false %>
       <% booked = false %>
       <!-- if the time is on the hour -->
@@ -73,22 +66,23 @@
                         <% booked = true %>
                         <!-- while a booking hasn't finished inbetween is true -->
                         <% inbetween = true %>
+                        <% roomName = room.name %>
                       <% end  %>
                       <% if meeting.date_out.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
                         <td><%= link_to meeting.description, meeting %></td>
                         <% booked = true %>
                         <% inbetween = false %>
                       <% end  %>
+                      <% if i > meeting.date_in.strftime("%H.%M").to_f && i < meeting.date_out.strftime("%H.%M").to_f && meeting.room.name == room.name %>
+                        <% booked = true %>
+                        <td id="done"></td>
+                      <% end %>
                   <% end  %>
                 <% end %>
               <% end %>
               <!-- Adds an empty cell if there is no booking -->
               <% if booked == false %>
-                <% if inbetween == true %>
-                  <td id="done"></td>
-                <% else %>
                   <td></td>
-                  <% end %>
                 <% else %>
                   <% booked = false %>
                 <% end %>
@@ -114,16 +108,16 @@
                   <% booked = true %>
                   <% inbetween = false %>
                   <% end  %>
+                  <% if i > meeting.date_in.strftime("%H.%M").to_f && i < meeting.date_out.strftime("%H.%M").to_f && meeting.room.name == room.name %>
+                    <% booked = true %>
+                    <td id="done"></td>
+                  <% end %>
                 <% end  %>
               <% end %>
             <% end %>
             <!-- Adds an empty cell if there is no booking, else turns booked value to false -->
             <% if booked == false %>
-              <% if inbetween == true %>
-                <td id="done"></td>
-              <% else %>
                 <td></td>
-              <% end %>
               <% else %>
                 <% booked = false %>
             <% end %>
