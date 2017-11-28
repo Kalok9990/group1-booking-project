@@ -20,13 +20,14 @@ class BookingsController < ApplicationController
 
   # GET /bookings/1/edit
   def edit
+    @rooms = Room.all
   end
 
   # POST /bookings
   # POST /bookings.json
   def create
     @booking = Booking.new(booking_params)
-    # @rooms = Room.all
+
 
     respond_to do |format|
       if @booking.save
