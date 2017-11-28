@@ -1,10 +1,8 @@
 <p id="notice"><%= notice %></p>
-
 <% start_date = params.fetch(:start_date, Date.today).to_date%>
 <% date_range = (start_date..(start_date)).to_a %>
 <%= link_to "Previous day", start_date: date_range.first - 1.day %>
 <%= link_to "Next Day", start_date:date_range.last + 1.day %>
-
 
 <table>
   <thead>
@@ -38,6 +36,7 @@
   </tbody>
 </table>
 
+<h1 id="roomsIndexHeader">Rooms</h1>
 
 <table>
   <thead>
@@ -50,22 +49,22 @@
       <% i = 9.00%>
       <% 17.times do |row| %>
         <tr>
-          <% if i.to_f % 1 ==0 %>
+          <% if i.to_f % 1 ==0%>
             <td class="timeCell"><%= number_with_precision i, :precision => 2 %></td>
             <% @rooms.each do |room| %>
               <% date_range.each_slice(7) do |week| %>
                 <% week.each do |day| %>
                   <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
-                    <%if meeting.date_in.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
-                      <td><%= link_to meeting.description, meeting %></td>
-                    <% end %>
-                    <% if meeting.date_out.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
-                      <td><%= link_to meeting.description, meeting %></td>
-                    <% end  %>
+                      <%if meeting.date_in.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
+                        <td><%= link_to meeting.description, meeting %></td>
+                      <% end %>
+                      <% if meeting.date_out.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
+                        <td><%= link_to meeting.description, meeting %></td>
+                      <% end  %>
                   <% end  %>
                 <% end %>
               <% end %>
-                <td><%= link_to '-', new_booking_path, id: "form"%></td>
+                <td> <%= link_to ' ', new_booking_path, id: "form"%></td>
             <% end %>
             <% i += 0.30 %>
           <% else %>
@@ -84,10 +83,10 @@
                 <% end  %>
               <% end %>
             <% end %>
-            <td><%= link_to '-', new_booking_path, id: "form"%></td>
+            <td><%= link_to ' ', new_booking_path, id: "form"%></td>
             <% end %>
           <% end %>
-          <% i += 0.70 %>
+          <% i += 0.7 %>
         <% end %>
 
         </tr>
@@ -99,5 +98,5 @@
 
 <br>
 
-<%= link_to 'New Room', new_room_path %>
-<%= link_to 'New Booking', new_booking_path, id: "form"%>
+<%= link_to 'New Room', new_room_path, :class => "btn btn-info", :role => "button" %>
+<%= link_to 'New Booking', new_booking_path, :class => "btn btn-info", :role => "button", id: "form"%>
