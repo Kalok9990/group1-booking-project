@@ -85,6 +85,7 @@ form{
   border-radius: 12px;
   border: 1px solid black;
   padding-left: 30px;
+  margin-top: 49px;
 }
 
 .successfulBooking{
@@ -94,5 +95,3 @@ form{
   border-radius: 12px;
   margin-top: 17%;
 }
-
-#
