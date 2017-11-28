@@ -44,7 +44,7 @@
 <h1 id="roomsIndexHeader">Rooms</h1>
 
 <!-- Creates the table and places bookings into the correct time and room -->
-<table>
+<table id = "bookingTable">
   <thead>
     <tr>
       <th>Time</th>
@@ -54,50 +54,70 @@
       <% end %>
     </tr>
       <!-- if the time is on the hour -->
+      <% booked = false %>
       <% i = 9.00%>
       <% 17.times do |x| %>
         <tr>
           <% if i.to_f % 1 ==0%>
+            <!-- Places the times on the left most column -->
             <td class="timeCell"><%= number_with_precision i, :precision => 2 %></td>
             <% @rooms.each do |room| %>
-              <% date_range.each_slice(7) do |week| %>
+            <!-- Goes into my date_range array  -->
+              <% date_range.each_slice(1) do |week| %>
                 <% week.each do |day| %>
                 <!-- Selects bookings that have the same date as the date selected above the table -->
                   <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
                   <!-- places the booking in time into the right room and time slot -->
                       <%if meeting.date_in.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
-                        <td><%= link_to meeting.description, meeting %></td>
+                        <td class="booking">Start: <%= link_to meeting.description, meeting %></td>
+                        <% booked = true %>
+                      <% end  %>
+                      <% if meeting.date_out.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
+                        <td>End: <%= link_to meeting.description, meeting %></td>
+                        <% booked = true %>
                       <% end  %>
                   <% end  %>
                 <% end %>
               <% end %>
+              <!-- Adds an empty cell if there is no booking -->
+              <% if booked == false %>
                 <td></td>
+              <% else %>
+                <% booked = false %>
+                <% end %>
             <% end %>
+            <!-- increments the time by half an hour for the next iteration of the loop -->
             <% i += 0.30 %>
           <% else %>
           <td class="timeCell"> <%=  number_with_precision i, :precision => 2  %></td>
           <% @rooms.each do |room| %>
-            <% date_range.each_slice(7) do |week| %>
+            <% date_range.each_slice(1) do |week| %>
               <% week.each do |day| %>
               <!-- Selects bookings that have the same date as the date selected above the table -->
                 <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
                 <!-- places the booking in time into the right room and time slot -->
                   <%if meeting.date_in.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
                     <td><%= link_to meeting.description, meeting %></td>
+                    <% booked = true %>
                 <% end %>
                   <!-- places the booking out time into the right room and time slot -->
                   <% if meeting.date_out.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
                   <td><%= link_to meeting.description, meeting %></td>
-
+                  <% booked = true %>
                   <% end  %>
                 <% end  %>
               <% end %>
             <% end %>
-            <td></td>
+            <!-- Adds an empty cell if there is no booking, else turns booked value to false -->
+            <% if booked == false %>
+              <td></td>
+            <% else %>
+              <% booked = false %>
+            <% end %>
           <% end %>
+          <!-- increments the time by half an hour for the next iteration of the loop -->
           <% i += 0.7 %>
         <% end %>
-
         </tr>
       <% end %>
       <th colspan="3"></th>
