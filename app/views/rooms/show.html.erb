@@ -24,6 +24,7 @@
          <td><%= booking.description  %></td>
          <td><%= booking.date_in  %></td>
          <td><%= booking.date_out  %></td>
+         <td id="deleteBooking"><%= link_to 'Delete Booking', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
        </tr>
        <% end %>
    </tbody>
