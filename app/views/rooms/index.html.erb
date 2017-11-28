@@ -5,6 +5,9 @@
   <p class="nameOfRoomInShow">
     <strong><%= room.name %></strong>
     <%= link_to 'Edit', edit_room_path(room) %>
+    <td id="deleteRoom">
+      <%= link_to 'Delete', room, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </td>
   </p>
 
   <h3>Bookings</h3>
@@ -27,6 +30,9 @@
            <td><%= booking.date_in  %></td>
            <td><%= booking.date_out  %></td>
            <td><%= link_to 'Edit', edit_booking_path(booking) %> </td>
+           <td id="deleteBooking">
+             <%= link_to 'Delete Booking', booking, method: :delete, data: { confirm: 'Are you sure?' } %>
+           </td>
          </tr>
          <% end %>
      </tbody>

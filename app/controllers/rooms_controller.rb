@@ -16,7 +16,7 @@ class RoomsController < ApplicationController
   # GET /rooms/1.json
   def show
     @rooms = Room.all
-
+    @bookings = Booking.all
   end
 
   # GET /rooms/new
@@ -61,7 +61,6 @@ class RoomsController < ApplicationController
   # DELETE /rooms/1
   # DELETE /rooms/1.json
   def destroy
-
     @room.destroy
     respond_to do |format|
       format.html { redirect_to rooms_url, notice: 'Room was successfully destroyed.' }
