@@ -1,20 +1,17 @@
 <p id="notice"><%= notice %></p>
-<!-- When looking at bookings, it will start on today's date -->
-<% start_date = params.fetch(:start_date, Date.today).to_date%>
-<% date_range = (start_date..(start_date)).to_a %>
 
 <!-- Allows you to cycle through daily bookings -->
-<%= link_to "Previous day", start_date: date_range.first - 1.day %>
-<%= link_to "Next Day", start_date:date_range.last + 1.day %>
+<%= link_to "Previous day", start_date: @date_range.first - 1.day %>
+<%= link_to "Next Day", start_date:@date_range.last + 1.day %>
 
 <!-- makes table to show day view -->
 <table>
   <thead>
     <tr>
       <!-- Abbreviates the names of the week -->
-      <% date_range.slice(0,7).each do |day| %>
+      <% @date_range.slice(0,7).each do |day| %>
       <th><%= I18n.t("date.abbr_day_names")[day.wday] %></th>
-      <th><% date_range.each_slice(7) do |week|  %>
+      <th><% @date_range.each_slice(7) do |week|  %>
           <% week.each do |day| %>
             <%= day %>
           <% end %>
@@ -26,11 +23,14 @@
 
 <!-- Shows the current day of the week plus month at the top of the page -->
   <tbody>
-  <% date_range.each_slice(7) do |week| %>
+  <% @date_range.each_slice(7) do |week| %>
     <tr>
       <% week.each do |day| %>
       <td>
       <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
+        <div><%= link_to meeting.description, meeting %></div>
+        <div><%= meeting.date_in.strftime("%H.%M") %></div>
+        <div><%= meeting.date_out.strftime("%H.%M") %></div>
       <% end %>
     </td>
     <% end %>
@@ -51,18 +51,19 @@
           <th class="Room name"><%= link_to room.name, room %></th>
       <% end %>
     </tr>
-      <!-- if the time is on the hour -->
-      <% inbetween = false %>
+
+      <% inbetween =  false %>
       <% booked = false %>
-      <% i = 9.00%>
+      <!-- if the time is on the hour -->
+      <% i = 9.00 %>
       <% 17.times do |x| %>
         <tr>
           <% if i.to_f % 1 ==0%>
             <!-- Places the times on the left most column -->
             <td class="timeCell"><%= number_with_precision i, :precision => 2 %></td>
             <% @rooms.each do |room| %>
-            <!-- Goes into my date_range array  -->
-              <% date_range.each_slice(1) do |week| %>
+            <!-- Goes into my @date_range array  -->
+              <% @date_range.each_slice(1) do |week| %>
                 <% week.each do |day| %>
                 <!-- Selects bookings that have the same date as the date selected above the table -->
                   <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
@@ -70,52 +71,61 @@
                       <%if meeting.date_in.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
                         <td class="booking"><%= link_to meeting.description, meeting %></td>
                         <% booked = true %>
+                        <!-- while a booking hasn't finished inbetween is true -->
                         <% inbetween = true %>
                       <% end  %>
                       <% if meeting.date_out.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
                         <td><%= link_to meeting.description, meeting %></td>
                         <% booked = true %>
-                        <% inbetween =false %>
+                        <% inbetween = false %>
                       <% end  %>
                   <% end  %>
                 <% end %>
               <% end %>
               <!-- Adds an empty cell if there is no booking -->
-              <% if booked == true && inbetween == true %>
-                <td id='done'></td>
-              <% elsif booked == false %>
-                <td></td>
-              <% elsif booked == true &&  %>
-                <% booked = false %>
+              <% if booked == false %>
+                <% if inbetween == true %>
+                  <td id="done"></td>
+                <% else %>
+                  <td></td>
+                  <% end %>
+                <% else %>
+                  <% booked = false %>
                 <% end %>
-            <% end %>
+              <% end %>
             <!-- increments the time by half an hour for the next iteration of the loop -->
             <% i += 0.30 %>
           <% else %>
           <td class="timeCell"> <%=  number_with_precision i, :precision => 2  %></td>
           <% @rooms.each do |room| %>
-            <% date_range.each_slice(1) do |week| %>
+            <% @date_range.each_slice(1) do |week| %>
               <% week.each do |day| %>
               <!-- Selects bookings that have the same date as the date selected above the table -->
                 <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
                 <!-- places the booking in time into the right room and time slot -->
-                  <%if meeting.date_in.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
+                  <% if meeting.date_in.strftime("%H.%M").to_f == i && meeting.room.name == room.name %>
                     <td><%= link_to meeting.description, meeting %></td>
                     <% booked = true %>
+                    <% inbetween = true %>
                 <% end %>
                   <!-- places the booking out time into the right room and time slot -->
                   <% if meeting.date_out.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
                   <td><%= link_to meeting.description, meeting %></td>
                   <% booked = true %>
+                  <% inbetween = false %>
                   <% end  %>
                 <% end  %>
               <% end %>
             <% end %>
             <!-- Adds an empty cell if there is no booking, else turns booked value to false -->
             <% if booked == false %>
-              <td></td>
-            <% else %>
-              <% booked = false %>
+              <% if inbetween == true %>
+                <td id="done"></td>
+              <% else %>
+                <td></td>
+              <% end %>
+              <% else %>
+                <% booked = false %>
             <% end %>
           <% end %>
           <!-- increments the time by half an hour for the next iteration of the loop -->

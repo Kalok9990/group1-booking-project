@@ -4,6 +4,8 @@ class RoomsController < ApplicationController
   # GET /rooms
   # GET /rooms.json
   def index
+    @start_date = params.fetch(:start_date, Date.today).to_date
+    @date_range = (@start_date..(@start_date)).to_a
     @rooms = Room.all
 
     @bookings = Booking.all
