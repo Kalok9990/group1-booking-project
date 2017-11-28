@@ -29,5 +29,10 @@
    </tbody>
 </table>
 
-<%= link_to 'Edit', edit_room_path(@room) %> |
-<%= link_to 'Back', rooms_path %>
+
+<!-- new booking form -->
+<%= render '/bookings/form', booking: @booking %>
+
+<br>
+
+<%= link_to 'New Room', new_room_path, :class => "btn btn-info", :role => "button" %>
