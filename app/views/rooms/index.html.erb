@@ -57,15 +57,15 @@
                 <% week.each do |day| %>
                   <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
                     <%if meeting.date_in.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
-                      <td class="roomCell" id="<%= room.name %>" data-num="<%= number_with_precision i, :precision =>2  %>"><%= link_to meeting.description, meeting %></td>
+                      <td><%= link_to meeting.description, meeting %></td>
                     <% end %>
                     <% if meeting.date_out.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
-                      <td class="roomCell" id="<%= room.name %>" data-num="<%= number_with_precision i, :precision =>2  %>"><%= link_to meeting.description, meeting %></td>
+                      <td><%= link_to meeting.description, meeting %></td>
                     <% end  %>
                   <% end  %>
                 <% end %>
               <% end %>
-                <td class="roomCell" id="<%= room.name %>" data-num="<%= number_with_precision i, :precision =>2  %>"><%= link_to '-', new_booking_path, id: "form"%></td>
+                <td><%= link_to '-', new_booking_path, id: "form"%></td>
             <% end %>
             <% i += 0.30 %>
           <% else %>
@@ -76,15 +76,15 @@
                 <% week.each do |day| %>
                 <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
                   <%if meeting.date_in.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
-                    <td class="roomCell" id="<%= room.name %>" data-num="<%= number_with_precision i, :precision =>2  %>"><%= link_to meeting.description, meeting %></td>
+                    <td><%= link_to meeting.description, meeting %></td>
                 <% end %>
                   <% if meeting.date_out.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
-                  <td class="roomCell" id="<%= room.name %>" data-num="<%= number_with_precision i, :precision =>2  %>"><%= link_to meeting.description, meeting %></td>
+                  <td><%= link_to meeting.description, meeting %></td>
                   <% end  %>
                 <% end  %>
               <% end %>
             <% end %>
-            <td class="roomCell" id="<%= room.name %>" data-num="<%= number_with_precision i, :precision =>2  %>"><%= link_to '-', new_booking_path, id: "form"%></td>
+            <td><%= link_to '-', new_booking_path, id: "form"%></td>
             <% end %>
           <% end %>
           <% i += 0.70 %>
