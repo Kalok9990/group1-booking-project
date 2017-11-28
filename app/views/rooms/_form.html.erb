@@ -1,4 +1,5 @@
 <%= form_with(model: room, local: true) do |form| %>
+  <!-- check for errors -->
   <% if room.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
@@ -11,6 +12,7 @@
     </div>
   <% end %>
 
+  <!-- form fields -->
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name, id: :room_name %>
