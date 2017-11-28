@@ -11,6 +11,11 @@
       </ul>
     </div>
   <% end %>
+  <!-- The field for selecting the room -->
+  <div class="field">
+    <%= form.label :room %>
+    <%= collection_select(:booking, :room_id, @rooms, :id, :name) %>
+  </div>
 <!-- The field for typing in the description of the booking -->
   <div class="field">
     <%= form.label :description %>
@@ -25,11 +30,6 @@
   <div class="field">
     <%= form.label :date_out %>
     <%= form.datetime_select :date_out, id: :booking_date_out, minute_step: 30, start_hour: 9, end_hour: 17 %>
-  </div>
-<!-- The field for selecting the room -->
-  <div class="field">
-    <%= form.label :room %>
-    <%= collection_select(:booking, :room_id, @rooms, :id, :name) %>
   </div>
 
 
