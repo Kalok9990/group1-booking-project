@@ -1,136 +1,33 @@
 <p id="notice"><%= notice %></p>
-<!-- When looking at bookings, it will start on today's date -->
-<% start_date = params.fetch(:start_date, Date.today).to_date%>
-<% date_range = (start_date..(start_date)).to_a %>
 
-<!-- Allows you to cycle through daily bookings -->
-<%= link_to "Previous day", start_date: date_range.first - 1.day %>
-<%= link_to "Next Day", start_date:date_range.last + 1.day %>
+<p class="nameOfRoomInShow">
+  <strong>Room name:</strong>
+  <%= @room.name %>
+</p>
 
-<!-- makes table to show day view -->
+<h3>Booking</h3>
+
 <table>
-  <thead>
-    <tr>
-      <!-- Abbreviates the names of the week -->
-      <% date_range.slice(0,7).each do |day| %>
-      <th><%= I18n.t("date.abbr_day_names")[day.wday] %></th>
-      <th><% date_range.each_slice(7) do |week|  %>
-          <% week.each do |day| %>
-            <%= day %>
-          <% end %>
-        <% end %>
-      </th>
-      <% end %>
-    </tr>
-  </thead>
+   <thead>
+     <tr>
+       <th>Description</th>
+       <th>Date in</th>
+       <th>Date out</th>
 
-<!-- Shows the current day of the week plus month at the top of the page -->
-  <tbody>
-  <% date_range.each_slice(7) do |week| %>
-    <tr>
-      <% week.each do |day| %>
-      <td>
-      <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
-        <div><%= link_to meeting.description, meeting %></div>
-        <div><%= meeting.date_in.strftime("%H.%M") %></div>
-        <div><%= meeting.date_out.strftime("%H.%M") %></div>
-      <% end %>
-    </td>
-    <% end %>
-    </tr>
-    <% end %>
-  </tbody>
+     </tr>
+   </thead>
+
+   <!-- loops through to show booking information for the room -->
+   <tbody>
+     <% @room.bookings.each do |booking|  %>
+       <tr>
+         <td><%= booking.description  %></td>
+         <td><%= booking.date_in  %></td>
+         <td><%= booking.date_out  %></td>
+       </tr>
+       <% end %>
+   </tbody>
 </table>
 
-<h1 id="roomsIndexHeader">Rooms</h1>
-
-<!-- Creates the table and places bookings into the correct time and room -->
-<table id = "bookingTable">
-  <thead>
-    <tr>
-      <th>Time</th>
-      <!-- Creates the columns for each room -->
-      <% @rooms.each do |room| %>
-          <th class="Room name"><%= link_to room.name, room %></th>
-      <% end %>
-    </tr>
-      <!-- if the time is on the hour -->
-      <% booked = false %>
-      <% i = 9.00%>
-      <% 17.times do |x| %>
-        <tr>
-          <% if i.to_f % 1 ==0%>
-            <!-- Places the times on the left most column -->
-            <td class="timeCell"><%= number_with_precision i, :precision => 2 %></td>
-            <% @rooms.each do |room| %>
-            <!-- Goes into my date_range array  -->
-              <% date_range.each_slice(1) do |week| %>
-                <% week.each do |day| %>
-                <!-- Selects bookings that have the same date as the date selected above the table -->
-                  <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
-                  <!-- places the booking in time into the right room and time slot -->
-                      <%if meeting.date_in.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
-                        <td class="booking"><%= link_to meeting.description, meeting %></td>
-                        <% booked = true %>
-                      <% end  %>
-                      <% if meeting.date_out.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
-                        <td><%= link_to meeting.description, meeting %></td>
-                        <% booked = true %>
-                      <% end  %>
-                  <% end  %>
-                <% end %>
-              <% end %>
-              <!-- Adds an empty cell if there is no booking -->
-              <% if booked == false %>
-                <td></td>
-              <% else %>
-                <% booked = false %>
-                <% end %>
-            <% end %>
-            <!-- increments the time by half an hour for the next iteration of the loop -->
-            <% i += 0.30 %>
-          <% else %>
-          <td class="timeCell"> <%=  number_with_precision i, :precision => 2  %></td>
-          <% @rooms.each do |room| %>
-            <% date_range.each_slice(1) do |week| %>
-              <% week.each do |day| %>
-              <!-- Selects bookings that have the same date as the date selected above the table -->
-                <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
-                <!-- places the booking in time into the right room and time slot -->
-                  <%if meeting.date_in.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
-                    <td><%= link_to meeting.description, meeting %></td>
-                    <% booked = true %>
-                <% end %>
-                  <!-- places the booking out time into the right room and time slot -->
-                  <% if meeting.date_out.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
-                  <td><%= link_to meeting.description, meeting %></td>
-                  <% booked = true %>
-                  <% end  %>
-                <% end  %>
-              <% end %>
-            <% end %>
-            <!-- Adds an empty cell if there is no booking, else turns booked value to false -->
-            <% if booked == false %>
-              <td></td>
-            <% else %>
-              <% booked = false %>
-            <% end %>
-          <% end %>
-          <!-- increments the time by half an hour for the next iteration of the loop -->
-          <% i += 0.7 %>
-        <% end %>
-        </tr>
-      <% end %>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-</table>
-
-
-<!-- new booking form -->
-<%= render '/bookings/form', booking: @booking %>
-
-<br>
-
-<%= link_to 'New Room', new_room_path, :class => "btn btn-info", :role => "button" %>
-<%= link_to 'New Booking', new_booking_path, :class => "btn btn-info", :role => "button", id: "form"%>
+<%= link_to 'Edit', edit_room_path(@room) %> |
+<%= link_to 'Back', rooms_path %>
