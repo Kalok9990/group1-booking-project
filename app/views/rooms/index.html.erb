@@ -1,7 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Rooms</h1>
+<<<<<<< HEAD
 <%= link_to 'New Room', new_room_path, :class => "btn btn-info", :role => "button" %>
+=======
+
+<%= link_to 'Create a new room', new_room_path, :class => "btn btn-info", :role => "button" %>
+>>>>>>> dev
 
 <% @rooms.each do |room| %>
   <p class="nameOfRoomInShow">
@@ -20,6 +25,8 @@
          <th>Description</th>
          <th>Start Time</th>
          <th>End Time</th>
+
+
 
        </tr>
      </thead>
@@ -42,8 +49,11 @@
 <% end %>
 
 <br>
+<<<<<<< HEAD
 
 <footer>
   <!-- new booking form -->
   <%= render '/bookings/form', booking: @booking %>
 </footer>
+=======
+>>>>>>> dev
