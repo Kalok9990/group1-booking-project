@@ -4,6 +4,7 @@
 <% @rooms.each do |room| %>
   <p class="nameOfRoomInShow">
     <strong><%= room.name %></strong>
+    <%= link_to 'Edit', edit_room_path(room) %>
   </p>
 
   <h3>Bookings</h3>
