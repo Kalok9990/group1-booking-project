@@ -70,11 +70,11 @@
                   <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
                   <!-- places the booking in time into the right room and time slot -->
                       <%if meeting.date_in.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
-                        <td class="booking">Start: <%= link_to meeting.description, meeting %></td>
+                        <td class="booking"><%= link_to meeting.description, meeting %></td>
                         <% booked = true %>
                       <% end  %>
                       <% if meeting.date_out.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
-                        <td>End: <%= link_to meeting.description, meeting %></td>
+                        <td><%= link_to meeting.description, meeting %></td>
                         <% booked = true %>
                       <% end  %>
                   <% end  %>
