@@ -4,7 +4,7 @@
 
 <%= link_to 'Create a new room', new_room_path, :class => "btn btn-info", :role => "button" %>
 
-<% @rooms.each do |room| %>
+<% @rooms.order(created_at: :ASC).each do |room| %>
   <p class="nameOfRoomInShow">
     <strong><%= room.name %></strong>
     <%= link_to 'Edit', edit_room_path(room) %>
