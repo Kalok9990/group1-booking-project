@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<% days = ["Sunday","Monday","Tuesday","Wednesday", "Thursday", "Friday", "Saturday"] %>
+
 <div id = "time">
   <!-- Allows you to cycle through daily bookings -->
   <tr>
@@ -41,8 +43,8 @@
       <tr>
         <th>Time</th>
         <!-- Creates the columns for each room -->
-        <% @rooms.each do |room| %>
-            <th class="<%= room.name %>"><%= link_to room.name, room %></th>
+        <% days.each do |day| %>
+          <th class=“Days”><%= day %></th>
         <% end %>
       </tr>
         <% roomName = '' %>
