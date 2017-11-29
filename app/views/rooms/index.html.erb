@@ -6,6 +6,7 @@
     <td class="change"><%= link_to "Previous day", start_date: @date_range.first - 1.day %></td>
     <td class="change"><%= link_to "Next Day", start_date:@date_range.last + 1.day %></td>
   </tr>
+
     <br>
   <tr>
     <td class="change"><%= link_to "Back 7 days", start_date: @date_range.first - 7.day %></td>
@@ -13,7 +14,7 @@
   </tr>
 
   <!-- makes table to show day view -->
-  <table >
+  <table id="fixedDay">
     <thead>
       <tr>
         <!-- Abbreviates the names of the week -->
@@ -67,6 +68,7 @@
                     <% end  %>
                   <% end %>
                 <% end %>
+            
                 <!-- Adds an empty cell if there is no booking -->
                 <% if booked == false %>
                     <td></td>
