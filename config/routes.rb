@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   # Route Directory
   root 'rooms#index'
+
+  get '/week', to: 'rooms#week'
 end

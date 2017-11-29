@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+
 <div id = "time">
   <!-- Allows you to cycle through daily bookings -->
   <tr>
@@ -12,32 +13,17 @@
     <td class="change"><%= link_to "Forward 7 days", start_date: @date_range.first + 7.day %></td>
   </tr>
 
-  <!-- makes table to show day view -->
-  <table >
-    <thead>
-      <tr>
-        <!-- Abbreviates the names of the week -->
-        <% @date_range.slice(0,7).each do |day| %>
-        <th><%= I18n.t("date.abbr_day_names")[day.wday] %></th>
-        <th><% @date_range.each_slice(7) do |week|  %>
-            <% week.each do |day| %>
-              <%= day %>
-            <% end %>
-          <% end %>
-        </th>
-        <% end %>
-      </tr>
-    </thead>
-  </table>
-</div>
 
+</div>
 
 
   <h1 id="roomsIndexHeader">Rooms</h1>
 
+<% @week_range.each do |day| %>
   <!-- Creates the table and places bookings into the correct time and room -->
-  <table id = "bookingTable">
+  <table id = "weekBookingTable">
     <thead>
+      <th id="weekDay"><%= I18n.t("date.abbr_day_names")[day.wday] %></th>
       <tr>
         <th>Time</th>
         <!-- Creates the columns for each room -->
@@ -56,15 +42,12 @@
             <td class="timeCell"><%= number_with_precision i, :precision => 2 %></td>
               <% @rooms.each do |room| %>
               <!-- Goes into my @date_range array  -->
-                <% @date_range.each_slice(1) do |week| %>
-                  <% week.each do |day| %>
                   <!-- Selects bookings that have the same date as the date selected above the table -->
                     <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
                         <% if i > meeting.date_in.strftime("%H.%M").to_f && i < meeting.date_out.strftime("%H.%M").to_f && meeting.room.name == room.name %>
                           <% booked = true %>
                           <td id="done"><%= link_to meeting.description, meeting %></td>
-                        <% end %>
-                    <% end  %>
+
                   <% end %>
                 <% end %>
                 <!-- Adds an empty cell if there is no booking -->
@@ -85,51 +68,8 @@
       </tr>
     </thead>
   </table>
-
-<!-- Shows all bookings -->
-<h1>Rooms</h1>
-<% @rooms.each do |room| %>
-   <td id="rooms"><%= room.name %></td>
 <% end %>
-<br>
-<%= link_to 'Create a new room', new_room_path, :class => "btn btn-info", :role => "button" %>
 
-<% @rooms.order(created_at: :ASC).each do |room| %>
-  <p class="nameOfRoomInShow">
-    <strong><%= room.name %></strong>
-    <%= link_to 'Edit', edit_room_path(room) %>
-    <td id="deleteRoom">
-      <%= link_to 'Delete', room, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </td>
-  </p>
-
-  <h3>Bookings</h3>
-
-  <table>
-     <thead>
-       <tr>
-         <th>Description</th>
-         <th>Start Time</th>
-         <th>End Time</th>
-       </tr>
-     </thead>
-
-     <!-- loops through to show booking information for the room -->
-     <tbody>
-       <% room.bookings.order(date_in: :ASC).each do |booking|  %>
-         <tr>
-           <td><%= booking.description  %></td>
-           <td><%= booking.date_in.to_time.strftime('%a %e %B %Y %H:%M')  %></td>
-           <td><%= booking.date_out.to_time.strftime('%a %e %B %Y %H:%M')  %></td>
-           <td><%= link_to 'Edit', edit_booking_path(booking) %> </td>
-           <td id="deleteBooking">
-             <%= link_to 'Delete Booking', booking, method: :delete, data: { confirm: 'Are you sure?' } %>
-           </td>
-         </tr>
-         <% end %>
-     </tbody>
-  </table>
-<% end %>
 
 <br>
 
