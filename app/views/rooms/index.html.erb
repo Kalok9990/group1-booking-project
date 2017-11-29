@@ -68,11 +68,6 @@
                         <% inbetween = true %>
                         <% roomName = room.name %>
                       <% end  %>
-                      <% if meeting.date_out.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
-                        <td><%= link_to meeting.description, meeting %></td>
-                        <% booked = true %>
-                        <% inbetween = false %>
-                      <% end  %>
                       <% if i > meeting.date_in.strftime("%H.%M").to_f && i < meeting.date_out.strftime("%H.%M").to_f && meeting.room.name == room.name %>
                         <% booked = true %>
                         <td id="done"></td>
@@ -102,12 +97,6 @@
                     <% booked = true %>
                     <% inbetween = true %>
                 <% end %>
-                  <!-- places the booking out time into the right room and time slot -->
-                  <% if meeting.date_out.strftime("%H.%M").to_f == i && meeting.room.name == room.name%>
-                  <td><%= link_to meeting.description, meeting %></td>
-                  <% booked = true %>
-                  <% inbetween = false %>
-                  <% end  %>
                   <% if i > meeting.date_in.strftime("%H.%M").to_f && i < meeting.date_out.strftime("%H.%M").to_f && meeting.room.name == room.name %>
                     <% booked = true %>
                     <td id="done"></td>
@@ -132,11 +121,12 @@
   </thead>
 </table>
 
-
-<!-- new booking form -->
-<%= render '/bookings/form', booking: @booking %>
+<!-- Shows all bookings -->
 <h1>Rooms</h1>
-
+<% @rooms.each do |room| %>
+   <td id="rooms"><%= room.name %></td>
+<% end %>
+<br>
 <%= link_to 'Create a new room', new_room_path, :class => "btn btn-info", :role => "button" %>
 
 <% @rooms.each do |room| %>
