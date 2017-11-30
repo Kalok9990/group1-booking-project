@@ -35,6 +35,7 @@ class BookingsController < ApplicationController
 
 
     respond_to do |format|
+      @bookings = Booking.all
       if @booking.save
         format.html { redirect_to week_path, notice: 'Booking was successfully created.' }
         format.json { render :show, status: :created, location: @booking }
@@ -48,6 +49,7 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1
   # PATCH/PUT /bookings/1.json
   def update
+    @bookings = Booking.all
     respond_to do |format|
       if @booking.update(booking_params)
         format.html { redirect_to week_path, notice: 'Booking was successfully updated.' }
@@ -65,7 +67,7 @@ class BookingsController < ApplicationController
 
     @booking.destroy
     respond_to do |format|
-      format.html { redirect_to '/rooms', notice: 'Booking was successfully destroyed.' }
+      format.html { redirect_to '/week', notice: 'Booking was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

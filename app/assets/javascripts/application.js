@@ -18,6 +18,8 @@
 //= require bootstrap-sprockets
 //= require moment
 //= require bootstrap-datetimepicker
+$(document).on('turbolinks:load', function() {
+
 
 jQuery(function($) {
 		var open = false;
@@ -33,3 +35,5 @@ jQuery(function($) {
 			}
 		});
 	});
+
+  });
