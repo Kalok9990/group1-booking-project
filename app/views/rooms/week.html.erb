@@ -17,7 +17,7 @@
       <th>Time</th>
       <!-- Creates the columns for each room -->
       <% @week_range.each do |day| %>
-          <th class=“Days”><%= day %> <%= I18n.t("date.day_names")[day.wday] %></th>
+          <th class=“Days”><%=  I18n.t("date.day_names")[day.wday] %> <br> <%= day.strftime('%DD') %> </th>
       <% end %>
     </tr>
 
