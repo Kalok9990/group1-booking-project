@@ -15,31 +15,4 @@
       <%= link_to 'Delete', room, method: :delete, data: { confirm: 'Are you sure?' } %>
     </td>
   </p>
-
-  <h3>Bookings</h3>
-
-  <table>
-     <thead>
-       <tr>
-         <th>Description</th>
-         <th>Start Time</th>
-         <th>End Time</th>
-       </tr>
-     </thead>
-
-     <!-- loops through to show booking information for the room -->
-     <tbody>
-       <% room.bookings.order(date_in: :ASC).each do |booking|  %>
-         <tr>
-           <td><%= booking.description  %></td>
-           <td><%= booking.date_in.to_time.strftime('%a %e %B %Y %H:%M')  %></td>
-           <td><%= booking.date_out.to_time.strftime('%a %e %B %Y %H:%M')  %></td>
-           <td><%= link_to 'Edit', edit_booking_path(booking) %> </td>
-           <td id="deleteBooking">
-             <%= link_to 'Delete Booking', booking, method: :delete, data: { confirm: 'Are you sure?' } %>
-           </td>
-         </tr>
-         <% end %>
-     </tbody>
-  </table>
 <% end %>
