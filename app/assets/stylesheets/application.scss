@@ -76,8 +76,6 @@ table{
 }
 
 body {
- padding-left: 20px;
- padding-right: 20px;
  text-align: center;
 }
 
@@ -190,6 +188,23 @@ footer{
 
 .navbar1{
   margin: 25px;
+  color: black;
+  float: left;
+}
+
+nav{
+  width: 100%;
+  position: fixed;
+  float: left;
+}
+
+#notice{
+  margin: 0 0 10px;
+  margin-top: 100px;
+}
+
+.spartaLogo{
+  float: left;
 }
 
 #time {
