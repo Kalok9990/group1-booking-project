@@ -12,5 +12,13 @@
 
   <body>
     <%= yield %>
+    <div id="footerSlideContainer">
+    	<div class="fa fa-arrow-up fa-3x" id="footerSlideButton"></div>
+    	<div id="footerSlideContent">
+    		<div id="footerSlideText">
+          <%= render '/bookings/form', booking: @booking %>
+    		</div>
+    	</div>
+    </div>
   </body>
 </html>

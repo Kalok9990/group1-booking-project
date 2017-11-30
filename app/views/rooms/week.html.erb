@@ -2,13 +2,10 @@
 
 
 <div id = "time">
-
   <tr>
     <td class="change"><%= link_to "Back 7 days", start_date: @week_range.first - 7.day %></td>
     <td class="change"><%= link_to "Forward 7 days", start_date: @week_range.last + 7.day %></td>
   </tr>
-
-
 </div>
 
 <table id=“bookingTable”>
@@ -20,6 +17,7 @@
           <th class=“Days”><a href='/day?start_date=<%= day %>'><%=  I18n.t("date.day_names")[day.wday] %> <br> <%= day.strftime('%d') %> </a></th>
       <% end %>
     </tr>
+
       <!-- if the time is on the hour -->
       <% i = 8.00 %>
       <% while i.to_f <= 18.00 %>
@@ -31,29 +29,23 @@
             <td>
               <% @bookings.select {|b| b.date_in.to_date == day}.each do |booking| %>
                 <% if i > booking.date_in.strftime("%H.%M").to_f && i < booking.date_out.strftime("%H.%M").to_f %>
+
                 <% bookingDescription = booking.description %>
-                <div style="background-color: <%= booking.room.color %>"><%= link_to booking.description, booking %></div>
+                <div class="booking" style="background-color: <%= booking.room.color %>"><%= link_to booking.description, booking %></div>
               <% end %>
             <% end %>
           </td>
-            <% end %>
-          <!-- if statement to show correct time in left column -->
-          <% if i.modulo(1).round(2) == 0.45 %>
-            <% i += 0.55 %>
-          <% else %>
-            <% i += 0.15 %>
-          <% end %>
-        </tr>
-      <% end %>
-      <th colspan=“3”></th>
-    </tr>
+        <% end %>
+        <!-- if statement to show correct time in left column -->
+        <% if i.modulo(1).round(2) == 0.45 %>
+          <% i += 0.55 %>
+        <% else %>
+          <% i += 0.15 %>
+        <% end %>
+      </tr>
+    <% end %>
+    <th colspan=“3”></th>
   </thead>
 </table>
 
 
-<br>
-
-<footer>
-  <!-- new booking form -->
-  <%= render '/bookings/form', booking: @booking %>
-</footer>
