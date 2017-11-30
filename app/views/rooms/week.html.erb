@@ -4,11 +4,13 @@
 <div id = "weekTime">
 
   <tr id = "weekTime">
+    <td class="change" ><%= link_to "Previous Month <--", start_date: @week_range.first - 31.day %></td>
     <td class="change" ><%= link_to "Previous Week <--", start_date: @week_range.first - 7.day %></td>
     <% @date_range.each do |day| %>
       <td ><a id="month"><%= I18n.t("date.month_names")[day.month] %></a></td>
       <% end %>
     <td class="change"><%= link_to "--> Next Week", start_date: @week_range.last + 7.day %></td>
+    <td class="change"><%= link_to "--> Next Month", start_date: @week_range.last + 31.day %></td>
   </tr>
 </div>
 

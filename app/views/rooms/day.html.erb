@@ -1,25 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<table id="time">
+<div id = "weekTime">
 
-  <div id="time" >
-    <tr id="timeRow">
-        <!-- Abbreviates the names of the week and change day-->
-        <% @date_range.slice(0,7).each do |day| %>
-        <td><%= I18n.t("date.abbr_day_names")[day.wday] %> <p>  </p>     <%= day %></td>
-        <% end %>
-
-        <td class="change"><%= link_to "Previous day", start_date: @date_range.first - 1.day %></td>
-        <td class="change"><%= link_to "Next Day", start_date:@date_range.last + 1.day %></td>
-        <td class="change"><%= link_to "Back 7 days", start_date: @date_range.first - 7.day %></td>
-        <td class="change"><%= link_to "Forward 7 days", start_date: @date_range.first + 7.day %></td>
-      </tr>
-    </div>
-  </table>
+  <tr id = "weekTime">
+    <td class="change" ><%= link_to "Previous Week <--", start_date: @date_range.first - 7.day %></td>
+    <td class="change" ><%= link_to "Previous Day <--", start_date: @date_range.first - 1.day %></td>
+    <% @date_range.each do |day| %>
+      <td ><a id="month"><%= I18n.t("date.day_names")[day.wday] %> <%= day %></a></td>
+      <% end %>
+    <td class="change"><%= link_to "--> Next Day", start_date: @date_range.last + 1.day %></td>
+    <td class="change"><%= link_to "--> Next Week", start_date: @date_range.last + 7.day %></td>
+  </tr>
+</div>
 
 
   <!-- Creates the table and places bookings into the correct time and room -->
-  <table id = "bookingTable">
+  <table  class="table-bordered">
     <thead>
       <tr>
         <th>Time</th>
