@@ -39,7 +39,12 @@
 <!--Button that is pressed to submit the form  -->
   <div class="actions">
     <%= form.submit %>
-
   </div>
+
+  <% @bookings.each do |booking| %>
+    <tr>
+      <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
 
 <% end %>
