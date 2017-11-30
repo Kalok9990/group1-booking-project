@@ -4,7 +4,12 @@ class BookingsController < ApplicationController
   # GET /bookings
   # GET /bookings.json
   def index
+    @start_date = params.fetch(:start_date, Date.today).to_date
+    @date_range = (@start_date..(@start_date)).to_a
+    @week_range = (@start_date.beginning_of_week..(@start_date.beginning_of_week+ 4.day)).to_a
+    @rooms = Room.all
     @bookings = Booking.all
+    @booking = Booking.new
   end
 
   # GET /bookings/1
@@ -57,9 +62,10 @@ class BookingsController < ApplicationController
   # DELETE /bookings/1
   # DELETE /bookings/1.json
   def destroy
+
     @booking.destroy
     respond_to do |format|
-      format.html { redirect_to rooms_path, notice: 'Booking was successfully destroyed.' }
+      format.html { redirect_to '/rooms', notice: 'Booking was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -4,10 +4,11 @@ class RoomsController < ApplicationController
   # GET /rooms
   # GET /rooms.json
   def index
+    @start_date = params.fetch(:start_date, Date.today).to_date
+    @date_range = (@start_date..(@start_date)).to_a
+
     @rooms = Room.all
-
     @bookings = Booking.all
-
     @booking = Booking.new
 
   end
@@ -16,12 +17,21 @@ class RoomsController < ApplicationController
   # GET /rooms/1.json
   def show
     @rooms = Room.all
-    @bookings = Booking.all
+
   end
 
   # GET /rooms/new
   def new
     @room = Room.new
+  end
+
+  def week
+    @start_date = params.fetch(:start_date, Date.today).to_date
+    @date_range = (@start_date..(@start_date)).to_a
+    @week_range = (@start_date.beginning_of_week..(@start_date.beginning_of_week+ 4.day)).to_a
+    @rooms = Room.all
+    @bookings = Booking.all
+    @booking = Booking.new
   end
 
   # GET /rooms/1/edit
@@ -76,6 +86,6 @@ class RoomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def room_params
-      params.require(:room).permit(:name)
+      params.require(:room).permit(:name, :color)
     end
 end

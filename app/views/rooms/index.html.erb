@@ -1,7 +1,93 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Rooms</h1>
+<div id = "time">
+  <!-- Allows you to cycle through daily bookings -->
+  <tr>
+    <td class="change"><%= link_to "Previous day", start_date: @date_range.first - 1.day %></td>
+    <td class="change"><%= link_to "Next Day", start_date:@date_range.last + 1.day %></td>
+  </tr>
 
+    <br>
+  <tr>
+    <td class="change"><%= link_to "Back 7 days", start_date: @date_range.first - 7.day %></td>
+    <td class="change"><%= link_to "Forward 7 days", start_date: @date_range.first + 7.day %></td>
+  </tr>
+
+  <!-- makes table to show day view -->
+  <table id="fixedDay">
+    <thead>
+      <tr>
+        <!-- Abbreviates the names of the week -->
+        <% @date_range.slice(0,7).each do |day| %>
+        <th><%= I18n.t("date.abbr_day_names")[day.wday] %></th>
+        <th><% @date_range.each_slice(7) do |week|  %>
+            <% week.each do |day| %>
+              <%= day %>
+            <% end %>
+          <% end %>
+        </th>
+        <% end %>
+      </tr>
+    </thead>
+  </table>
+</div>
+
+
+
+  <h1 id="roomsIndexHeader">Rooms</h1>
+
+  <!-- Creates the table and places bookings into the correct time and room -->
+  <table id = "bookingTable">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <!-- Creates the columns for each room -->
+        <% @rooms.each do |room| %>
+            <th class="<%= room.name %>"><%= link_to room.name, room %></th>
+        <% end %>
+      </tr>
+        <% roomName = '' %>
+        <% inbetween =  false %>
+        <% booked = false %>
+        <!-- if the time is on the hour -->
+        <% i = 8.00 %>
+        <% 41.times do |x| %>
+          <tr>
+              <!-- Places the times on the left most column -->
+            <td class="timeCell"><%= number_with_precision i, :precision => 2 %></td>
+              <% @rooms.each do |room| %>
+              <td>
+                <!-- Goes into my @date_range array  -->
+                  <% @date_range.each do |day| %>
+                  <!-- Selects bookings that have the same date as the date selected above the table -->
+                    <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
+                        <% if i >= meeting.date_in.strftime("%H.%M").to_f && i < meeting.date_out.strftime("%H.%M").to_f && meeting.room.name == room.name %>
+                          <% booked = true %>
+                          <div id="done"><%= link_to meeting.description, meeting %></div>
+                      <% end %>
+                  <% end %>
+                <% end %>
+                <!-- Adds an empty cell if there is no booking -->
+              </td>
+                <% end %>
+              <% if i.modulo(1).round(2) == 0.45 %>
+                <% i += 0.55 %>
+              <% else %>
+                <% i += 0.15 %>
+              <% end %>
+            </tr>
+            <% end %>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+  </table>
+
+<!-- Shows all bookings -->
+<h1>Rooms</h1>
+<% @rooms.each do |room| %>
+   <td id="rooms"><%= room.name %></td>
+<% end %>
+<br>
 <%= link_to 'Create a new room', new_room_path, :class => "btn btn-info", :role => "button" %>
 
 <% @rooms.order(created_at: :ASC).each do |room| %>
