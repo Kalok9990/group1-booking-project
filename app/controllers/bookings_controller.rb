@@ -67,7 +67,7 @@ class BookingsController < ApplicationController
 
     @booking.destroy
     respond_to do |format|
-      format.html { redirect_to '/rooms', notice: 'Booking was successfully destroyed.' }
+      format.html { redirect_to '/week', notice: 'Booking was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

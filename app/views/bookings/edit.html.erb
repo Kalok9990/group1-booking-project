@@ -2,4 +2,5 @@
 
 <%= render 'form', booking: @booking %>
 
+<%= link_to 'Delete', @booking, :confirm => "Are you sure?", :method => :delete, :class => 'btn btn-info deleteButton' %>
 <%= link_to 'Back', rooms_path, :class => 'btn btn-info backbutton' %>
