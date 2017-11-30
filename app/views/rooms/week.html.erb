@@ -2,21 +2,16 @@
 
 
 <div id = "time">
-  <!-- Allows you to cycle through daily bookings -->
+
   <tr>
-    <td class="change"><%= link_to "Previous day", start_date: @date_range.first - 1.day %></td>
-    <td class="change"><%= link_to "Next Day", start_date:@date_range.last + 1.day %></td>
-  </tr>
-    <br>
-  <tr>
-    <td class="change"><%= link_to "Back 7 days", start_date: @date_range.first - 7.day %></td>
-    <td class="change"><%= link_to "Forward 7 days", start_date: @date_range.first + 7.day %></td>
+    <td class="change"><%= link_to "Back 7 days", start_date: @week_range.first - 7.day %></td>
+    <td class="change"><%= link_to "Forward 7 days", start_date: @week_range.last + 7.day %></td>
   </tr>
 
 
 </div>
 
-<table id = “bookingTable”>
+<table id=“bookingTable”>
   <thead>
     <tr>
       <th>Time</th>
@@ -35,9 +30,10 @@
       <% i = 8.00 %>
       <% while i.to_f <= 18.00 %>
         <tr>
-            <!-- Places empty cell -->
+            <!-- Cells with time in -->
           <td class=“timeCell”><%= number_with_precision i, :precision => 2 %></td>
             <% @week_range.each do |day| %>
+            <!-- Creates table cell. If there is a booking puts booking information -->
             <td>
               <% @bookings.select {|b| b.date_in.to_date == day}.each do |booking| %>
                 <% if i > booking.date_in.strftime("%H.%M").to_f && i < booking.date_out.strftime("%H.%M").to_f %>
