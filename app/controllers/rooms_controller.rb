@@ -6,7 +6,7 @@ class RoomsController < ApplicationController
   def index
     @start_date = params.fetch(:start_date, Date.today).to_date
     @date_range = (@start_date..(@start_date)).to_a
-    @week_range = (@start_date..(@start_date + 5.day)).to_a
+    @week_range = (@start_date..(@start_date + 7.day)).to_a
     @rooms = Room.all
     @bookings = Booking.all
     @booking = Booking.new
