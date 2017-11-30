@@ -252,9 +252,18 @@ a {
 
 .allRoomsHeader{
   margin-top: 115px;
+  width: 50%;
+  margin-left: 26%;
+  border-radius: 0px;
+  color: black;
+
 }
 
 .editDeleteLinks{
   font-size: 10px;
   display: block;
+}
+
+.editingRoomsHeader{
+  margin-top: 115px;
 }
