@@ -1,9 +1,6 @@
 
 <!-- Shows all bookings -->
 <h1>Rooms</h1>
-<% @rooms.each do |room| %>
-   <td id="rooms"><%= room.name %></td>
-<% end %>
 <br>
 <%= link_to 'Create a new room', new_room_path, :class => "btn btn-info", :role => "button" %>
 
