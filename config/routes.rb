@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :rooms
 
   # Route Directory
-  root 'bookings#index'
+  root 'rooms#week'
 
   get '/week', to: 'rooms#week'
+  get '/day', to: 'rooms#day'
 end
