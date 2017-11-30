@@ -30,14 +30,26 @@
       <% inbetween =  false %>
 
       <!-- if the time is on the hour -->
+      <% booked = false %>
       <% i = 8.00 %>
       <% while i.to_f <= 18.00 %>
         <tr>
             <!-- Places empty cell -->
           <td class=“timeCell”><%= number_with_precision i, :precision => 2 %></td>
             <% @week_range.each do |day| %>
-                <td>-</td>
-          <% end %>
+              <% @bookings.select {|b| b.date_in.to_date == day}.each do |booking| %>
+                <% if i > booking.date_in.strftime("%H.%M").to_f && i < booking.date_out.strftime("%H.%M").to_f %>
+                <td>Booking</td>
+                <% booked = true %>
+              <% end %>
+                <% end %>
+              <% if booked == false %>
+                  <td></td>
+                <% else %>
+                  <% booked = false %>
+                <% end %>
+
+            <% end %>
           <!-- if statement to show correct time in left column -->
           <% if i.modulo(1).round(2) == 0.45 %>
             <% i += 0.55 %>
