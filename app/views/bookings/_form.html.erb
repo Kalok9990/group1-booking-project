@@ -11,15 +11,18 @@
       </ul>
     </div>
   <% end %>
+  <div class="field">
+    New Booking
+  </div>
+  <!-- The field for typing in the description of the booking -->
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :booking_description %>
+  </div>
   <!-- The field for selecting the room -->
   <div class="field">
     <%= form.label :room %>
     <%= collection_select(:booking, :room_id, @rooms, :id, :name) %>
-  </div>
-<!-- The field for typing in the description of the booking -->
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :booking_description %>
   </div>
 <!-- The field for selecting the start date of the booking -->
   <div class="field" id="dateSelect">
