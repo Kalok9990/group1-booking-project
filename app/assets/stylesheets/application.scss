@@ -238,16 +238,22 @@ a {
   color: black;
 }
 
-#weekTime {
-
-}
-
 #month {
   font-size: 20px;
   padding-left: 20px;
   padding-right: 20px;
 }
 
+#weekTime {
+  position: fixed;
+  text-align: center;
+  margin: auto;
+  top: 70px;
+  z-index: 1;
+  float: right;
+  width: 100%;
+
 .createNewRoomHeader{
   margin-top: 115px;
+
 }
