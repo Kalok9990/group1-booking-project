@@ -32,7 +32,7 @@
             <% @bookings.select {|b| b.date_in.to_date == day}.each do |booking| %>
               <% if i > booking.date_in.strftime("%H.%M").to_f && i <booking.date_out.strftime("%H.%M").to_f %>
                 <% bookingDescription = booking.description %>
-                <div style="background-color: <%= booking.room.color %>"><%= link_to booking.description, booking %></div>
+                <div class="booking" style="background-color: <%= booking.room.color %>"><%= link_to booking.description, booking %></div>
               <% end %>
             <% end %>
           </td>
@@ -50,8 +50,3 @@
 </table>
 
 <br>
-
-<footer>
-  <!-- new booking form -->
-  <%= render '/bookings/form', booking: @booking %>
-</footer>
