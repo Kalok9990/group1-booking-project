@@ -1,8 +1,7 @@
 
 <!-- Shows all bookings -->
 <h1>Rooms</h1>
-<br>
-<%= link_to 'Create a new room', new_room_path, :class => "btn btn-info", :role => "button" %>
+
 
 <% @rooms.order(created_at: :ASC).each do |room| %>
   <p class="nameOfRoomInShow">
