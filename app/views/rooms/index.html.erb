@@ -56,7 +56,7 @@
               <!-- Places the times on the left most column -->
             <td class="timeCell"><%= number_with_precision i, :precision => 2 %></td>
               <% @rooms.each do |room| %>
-              <!-- Goes into my @date_range array  -->
+                <!-- Goes into my @date_range array  -->
                 <% @date_range.each_slice(1) do |week| %>
                   <% week.each do |day| %>
                   <!-- Selects bookings that have the same date as the date selected above the table -->
@@ -68,7 +68,6 @@
                     <% end  %>
                   <% end %>
                 <% end %>
-
                 <!-- Adds an empty cell if there is no booking -->
                 <% if booked == false %>
                     <td></td>
