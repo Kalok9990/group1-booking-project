@@ -1,43 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<div id = "time">
-  <!-- Allows you to cycle through daily bookings -->
-  <tr>
-    <td class="change"><%= link_to "Previous day", start_date: @date_range.first - 1.day %></td>
-    <td class="change"><%= link_to "Next Day", start_date:@date_range.last + 1.day %></td>
-  </tr>
+<div id = "weekTime">
 
-    <br>
-  <tr>
-    <td class="change"><%= link_to "Back 7 days", start_date: @date_range.first - 7.day %></td>
-    <td class="change"><%= link_to "Forward 7 days", start_date: @date_range.first + 7.day %></td>
+  <tr id = "weekTime">
+    <td class="change" ><%= link_to "Previous Week <--", start_date: @date_range.first - 7.day %></td>
+    <td class="change" ><%= link_to "Previous Day <--", start_date: @date_range.first - 1.day %></td>
+    <% @date_range.each do |day| %>
+      <td ><a id="month"><%= I18n.t("date.day_names")[day.wday] %> <%= day %></a></td>
+      <% end %>
+    <td class="change"><%= link_to "--> Next Day", start_date: @date_range.last + 1.day %></td>
+    <td class="change"><%= link_to "--> Next Week", start_date: @date_range.last + 7.day %></td>
   </tr>
-
-  <!-- makes table to show day view -->
-  <table id="fixedDay">
-    <thead>
-      <tr>
-        <!-- Abbreviates the names of the week -->
-        <% @date_range.slice(0,7).each do |day| %>
-        <th><%= I18n.t("date.abbr_day_names")[day.wday] %></th>
-        <th><% @date_range.each_slice(7) do |week|  %>
-            <% week.each do |day| %>
-              <%= day %>
-            <% end %>
-          <% end %>
-        </th>
-        <% end %>
-      </tr>
-    </thead>
-  </table>
 </div>
 
 
-
-  <h1 id="roomsIndexHeader"></h1>
-
   <!-- Creates the table and places bookings into the correct time and room -->
-  <table id = "bookingTable" class="table-bordered">
+  <table  class="table-bordered">
     <thead>
       <tr>
         <th>Time</th>
@@ -46,9 +24,7 @@
             <th class="<%= room.name %>"><%= link_to room.name, room %></th>
         <% end %>
       </tr>
-        <% roomName = '' %>
-        <% inbetween =  false %>
-        <% booked = false %>
+
         <!-- if the time is on the hour -->
         <% i = 8.00 %>
         <% 41.times do |x| %>
@@ -63,7 +39,7 @@
                     <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
                         <% if i >= meeting.date_in.strftime("%H.%M").to_f && i < meeting.date_out.strftime("%H.%M").to_f && meeting.room.name == room.name %>
                           <% booked = true %>
-                          <div id="done" class="booking" style="background-color: <%= meeting.room.color %>"><%= link_to meeting.description, edit_booking_path(meeting) %></div>
+                          <div class="booking" style="background-color: <%= meeting.room.color %>"><a><%= link_to meeting.description, meeting %></a></div>
                       <% end %>
                   <% end %>
                 <% end %>
@@ -77,15 +53,7 @@
               <% end %>
             </tr>
             <% end %>
-        <th colspan="3"></th>
+
       </tr>
     </thead>
   </table>
-
-  <div id="footerSlideContainer">
-    <div class="fa fa-arrow-up fa-3x" id="footerSlideButton"></div>
-    <div id="footerSlideContent">
-      <div id="footerSlideText">
-        <%= render '/bookings/form', booking: @booking %>
-      </div>
-    </div>
