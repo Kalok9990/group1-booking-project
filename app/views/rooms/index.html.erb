@@ -57,15 +57,14 @@
             <td class="timeCell"><%= number_with_precision i, :precision => 2 %></td>
               <% @rooms.each do |room| %>
                 <!-- Goes into my @date_range array  -->
-                <% @date_range.each_slice(1) do |week| %>
-                  <% week.each do |day| %>
+                  <% @date_range.each do |day| %>
                   <!-- Selects bookings that have the same date as the date selected above the table -->
                     <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
                         <% if i > meeting.date_in.strftime("%H.%M").to_f && i < meeting.date_out.strftime("%H.%M").to_f && meeting.room.name == room.name %>
                           <% booked = true %>
                           <td id="done"><%= link_to meeting.description, meeting %></td>
                         <% end %>
-                    <% end  %>
+
                   <% end %>
                 <% end %>
                 <!-- Adds an empty cell if there is no booking -->

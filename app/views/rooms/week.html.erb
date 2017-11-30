@@ -22,33 +22,21 @@
       <th>Time</th>
       <!-- Creates the columns for each room -->
       <% @week_range.each do |day| %>
-          <th class=“Days”><%= day %> <%= I18n.t("date.abbr_day_names")[day.wday] %></th>
+          <th class=“Days”><%= day %> <%= I18n.t("date.day_names")[day.wday] %></th>
       <% end %>
     </tr>
 
 
       <% inbetween =  false %>
-      <% booked = true %>
+
       <!-- if the time is on the hour -->
       <% i = 8.00 %>
       <% while i.to_f <= 18.00 %>
         <tr>
             <!-- Places empty cell -->
           <td class=“timeCell”><%= number_with_precision i, :precision => 2 %></td>
-          <% if booked == false %>
-              <td></td>
-            <% else %>
-              <% booked = false %>
-            <% end %>
-          <% @rooms.each do |room|  %>
             <% @week_range.each do |day| %>
-                <% @bookings.select {|b| b.date_in.to_date == day}.each do |booking| %>
-                  <% if i >booking.date_in.strftime("H.%M").to_f && i< booking.date_out.strftime("%H.%M").to_f && booking.date_in.to_date == day%>
-                    <td><div class=“booking_block text-center”style=“background-color: red;“>Hello</td>
-                      <% booked = true %>
-                    <% end %>
-                  <% end %>
-              <% end %>
+                <td>-</td>
           <% end %>
           <!-- if statement to show correct time in left column -->
           <% if i.modulo(1).round(2) == 0.45 %>
