@@ -25,6 +25,15 @@ class RoomsController < ApplicationController
     @room = Room.new
   end
 
+  def day
+    @start_date = params.fetch(:start_date, Date.today).to_date
+    @date_range = (@start_date..(@start_date)).to_a
+    @week_range = (@start_date.beginning_of_week..(@start_date.beginning_of_week+ 4.day)).to_a
+    @rooms = Room.all
+    @bookings = Booking.all
+    @booking = Booking.new
+  end
+
   def week
     @start_date = params.fetch(:start_date, Date.today).to_date
     @date_range = (@start_date..(@start_date)).to_a
