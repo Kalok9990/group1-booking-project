@@ -1,10 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 
-<div id = "time">
-  <tr>
-    <td class="change"><%= link_to "Back 7 days", start_date: @week_range.first - 7.day %></td>
-    <td class="change"><%= link_to "Forward 7 days", start_date: @week_range.last + 7.day %></td>
+<div id = "weekTime">
+
+  <tr id = "weekTime">
+    <td class="change" ><%= link_to "Previous Week <--", start_date: @week_range.first - 7.day %></td>
+    <% @date_range.each do |day| %>
+      <td ><a id="month"><%= I18n.t("date.month_names")[day.month] %></a></td>
+      <% end %>
+    <td class="change"><%= link_to "--> Next Week", start_date: @week_range.last + 7.day %></td>
   </tr>
 </div>
 
@@ -20,7 +24,7 @@
 
       <!-- if the time is on the hour -->
       <% i = 8.00 %>
-      <% while i.to_f <= 18.00 %>
+      <% while i.to_f <= 18.15 %>
         <tr>
             <!-- Cells with time in -->
           <td class=“timeCell”><%= number_with_precision i, :precision => 2 %></td>
@@ -28,10 +32,10 @@
             <!-- Creates table cell. If there is a booking puts booking information -->
             <td>
               <% @bookings.select {|b| b.date_in.to_date == day}.each do |booking| %>
-                <% if i > booking.date_in.strftime("%H.%M").to_f && i < booking.date_out.strftime("%H.%M").to_f %>
+                <% if i > booking.date_in.strftime("%H.%M").to_f && i <= booking.date_out.strftime("%H.%M").to_f %>
 
                 <% bookingDescription = booking.description %>
-                <div class="booking" style="background-color: <%= booking.room.color %>"><%= link_to booking.description, booking %></div>
+                <div class="booking" style="background-color: <%= booking.room.color %>"><a><%= link_to booking.description, booking %></a></div>
               <% end %>
             <% end %>
           </td>
@@ -44,6 +48,15 @@
         <% end %>
       </tr>
     <% end %>
-    <th colspan=“3”></th>
+
   </thead>
 </table>
+
+<div id="footerSlideContainer">
+  <div class="fa fa-arrow-up fa-3x" id="footerSlideButton"></div>
+  <div id="footerSlideContent">
+    <div id="footerSlideText">
+      <%= render '/bookings/form', booking: @booking %>
+    </div>
+  </div>
+</div>

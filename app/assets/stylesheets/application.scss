@@ -55,9 +55,10 @@ th {
 }
 
 td {
-  height: 80px;
-  width: 200px;
+  height: 60px;
+  width: 170px;
   border: 2px solid grey;
+  color: black;
 }
 
 tr{
@@ -69,6 +70,7 @@ table{
  margin: auto;
  margin-top: 41px;
  width:auto;
+ color: black;
 }
 
 body {
@@ -154,15 +156,6 @@ footer{
  height:50px;
 }
 
-#time {
- float: left;
- position: fixed;
-}
-
-.change {
- border: 1px solid black;
-}
-
 #weekBookingTable {
  float: right;
 }
@@ -188,4 +181,38 @@ footer{
 
 .navbar1{
   margin: 25px;
+}
+
+#time {
+  position: fixed;
+  top: 0px;
+  text-align: center;
+  float: left;
+  color: black;
+}
+
+#timeRow {
+ opacity: 0.8;
+ color:black;
+}
+
+.change {
+  height:60px;
+  margin: auto;
+  text-align: center;
+  color: black;
+}
+
+a {
+  color: black;
+}
+
+#weekTime {
+
+}
+
+#month {
+  font-size: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
