@@ -12,7 +12,7 @@
   </tr>
 </div>
 
-<table id=“bookingTable”>
+<table id=“bookingTable” class="table-bordered">
   <thead>
     <tr>
       <th>Time</th>
@@ -31,11 +31,11 @@
             <% @week_range.each do |day| %>
             <!-- Creates table cell. If there is a booking puts booking information -->
             <td>
-              <% @bookings.select {|b| b.date_in.to_date == day}.each do |booking| %>
-                <% if i > booking.date_in.strftime("%H.%M").to_f && i <= booking.date_out.strftime("%H.%M").to_f %>
+              <% @bookings.order(created_at: :ASC).select {|b| b.date_in.to_date == day}.each do |booking| %>
+                <% if i > booking.date_in.strftime("%H.%M").to_f && i < booking.date_out.strftime("%H.%M").to_f %>
 
                 <% bookingDescription = booking.description %>
-                <div class="booking" style="background-color: <%= booking.room.color %>"><a><%= link_to booking.description, booking %></a></div>
+                <div class="booking" style="background-color: <%= booking.room.color %>"><%= link_to booking.description, edit_booking_path(booking) %></div>
               <% end %>
             <% end %>
           </td>

@@ -43,7 +43,9 @@
  }
 
 .booking{
-  display: inline;
+  display: inherit;
+  height: inherit;
+  width: inherit;
 }
 
 th {
@@ -116,6 +118,13 @@ form{
  margin-top: 64px;
 }
 
+.newroom{
+border: none;
+}
+
+.newsroom{
+  margin: 20px 0px;
+}
 
 .nameOfRoomInShow{
  color: white;
