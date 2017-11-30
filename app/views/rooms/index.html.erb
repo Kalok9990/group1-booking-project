@@ -56,23 +56,19 @@
               <!-- Places the times on the left most column -->
             <td class="timeCell"><%= number_with_precision i, :precision => 2 %></td>
               <% @rooms.each do |room| %>
+              <td>
                 <!-- Goes into my @date_range array  -->
                   <% @date_range.each do |day| %>
                   <!-- Selects bookings that have the same date as the date selected above the table -->
                     <% @bookings.select {|b| b.date_in.to_date == day}.each do |meeting| %>
                         <% if i > meeting.date_in.strftime("%H.%M").to_f && i < meeting.date_out.strftime("%H.%M").to_f && meeting.room.name == room.name %>
                           <% booked = true %>
-                          <td id="done"><%= link_to meeting.description, meeting %></td>
-                        <% end %>
-
+                          <div id="done"><%= link_to meeting.description, meeting %></div>
+                      <% end %>
                   <% end %>
                 <% end %>
                 <!-- Adds an empty cell if there is no booking -->
-                <% if booked == false %>
-                    <td></td>
-                  <% else %>
-                    <% booked = false %>
-                  <% end %>
+              </td>
                 <% end %>
               <% if i.modulo(1).round(2) == 0.45 %>
                 <% i += 0.55 %>
