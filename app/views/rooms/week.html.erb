@@ -14,23 +14,22 @@
       <th>Time</th>
       <!-- Creates the columns for each room -->
       <% @week_range.each do |day| %>
-          <th class=“Days”><%=  I18n.t("date.day_names")[day.wday] %> <br> <%= day.strftime('%DD') %> </th>
+          <th class=“Days”><a href='/day?start_date=<%= day %>'><%=  I18n.t("date.day_names")[day.wday] %> <br> <%= day.strftime('%d') %> </a></th>
       <% end %>
     </tr>
 
-    <!-- if the time is on the hour -->
-    <% bookingDescription = "" %>
-    <% booked = true %>
-    <% i = 8.00 %>
-    <% while i.to_f <= 18.00 %>
-      <tr>
-        <!-- Cells with time in -->
-        <td class=“timeCell”><%= number_with_precision i, :precision => 2 %></td>
-        <% @week_range.each do |day| %>
-          <!-- Creates table cell. If there is a booking puts booking information -->
-          <td>
-            <% @bookings.select {|b| b.date_in.to_date == day}.each do |booking| %>
-              <% if i > booking.date_in.strftime("%H.%M").to_f && i <booking.date_out.strftime("%H.%M").to_f %>
+      <!-- if the time is on the hour -->
+      <% i = 8.00 %>
+      <% while i.to_f <= 18.00 %>
+        <tr>
+            <!-- Cells with time in -->
+          <td class=“timeCell”><%= number_with_precision i, :precision => 2 %></td>
+            <% @week_range.each do |day| %>
+            <!-- Creates table cell. If there is a booking puts booking information -->
+            <td>
+              <% @bookings.select {|b| b.date_in.to_date == day}.each do |booking| %>
+                <% if i > booking.date_in.strftime("%H.%M").to_f && i < booking.date_out.strftime("%H.%M").to_f %>
+
                 <% bookingDescription = booking.description %>
                 <div class="booking" style="background-color: <%= booking.room.color %>"><%= link_to booking.description, booking %></div>
               <% end %>
@@ -49,4 +48,4 @@
   </thead>
 </table>
 
-<br>
+
