@@ -13,9 +13,21 @@
   </tr>
 </div>
 
+<!-- table to show the color corresponding to the room -->
+<table id="key">
+<tr>
+  <th>Key:</th>
+</tr>
+<% @rooms.each do |room| %>
+  <tr>
+    <td style="background-color: <%= room.color %>"></td>
+    <td><%= room.name %></td>
+  </tr>
+<% end %>
+</table>
 
   <!-- Creates the table and places bookings into the correct time and room -->
-  <table  class="table-bordered">
+  <table  id="roomtable" class="table-bordered">
     <thead>
       <tr>
         <th>Time</th>

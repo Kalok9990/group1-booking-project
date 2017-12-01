@@ -130,6 +130,18 @@ border: none;
   margin: 20px 0px;
 }
 
+#key{
+  margin-top: 200px;
+  float: left;
+  margin-left: 5px;
+  position: fixed;
+  width: min-content;
+}
+
+#key td{
+  height: 10px;
+}
+
 .nameOfRoomInShow{
  color: black;
  font-size: 27px;
