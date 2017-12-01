@@ -11,6 +11,14 @@
   </head>
 
   <body>
+    <nav class=" navbar-fixed-top" style="background-color: #fffde6fa;">
+      <%= image_tag("sparta.png", :class => "spartaLogo") %>
+
+      <a class="navbar1"href="/week">Current Week</a>
+      <a class="navbar1"href="/day">Current Day</a>
+      <a class="navbar1"href="/rooms">All Rooms</a>
+      <a class="navbar1"href="/rooms/new">Create New Room</a>
+    </nav>
     <%= yield %>
   </body>
 </html>

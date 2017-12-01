@@ -1,0 +1,75 @@
+<p id="notice"><%= notice %></p>
+
+<table id="key" class=".table-bordered">
+<tr>
+  <td>Key:</td>
+</tr>
+<% @rooms.each do |room| %>
+  <tr>
+    <td style="background-color: <%= room.color %>"></td>
+    <td><%= room.name %></td>
+  </tr>
+<% end %>
+</table>
+
+<div id = "weekTime">
+
+
+    <%= link_to "Previous Month <--", start_date: @week_range.first - 31.day %>
+    <%= link_to "Previous Week <--", start_date: @week_range.first - 7.day %>
+    <% @date_range.each do |day| %>
+      <a id="month"><%= I18n.t("date.month_names")[day.month] %></a>
+      <% end %>
+    <%= link_to "--> Next Week", start_date: @week_range.last + 7.day %>
+    <%= link_to "--> Next Month", start_date: @week_range.last + 31.day %>
+
+</div>
+
+<table id=“bookingTable” class="table-bordered">
+  <thead>
+    <tr>
+      <th>Time</th>
+      <!-- Creates the columns for each room -->
+      <% @week_range.each do |day| %>
+          <th class=“Days”><a href='/day?start_date=<%= day %>'><%=  I18n.t("date.day_names")[day.wday] %> <br> <%= day.strftime('%d') %> </a></th>
+      <% end %>
+    </tr>
+
+      <!-- if the time is on the hour -->
+      <% i = 8.00 %>
+      <% while i.to_f <= 18.15 %>
+        <tr>
+            <!-- Cells with time in -->
+          <td class=“timeCell”><%= number_with_precision i, :precision => 2 %></td>
+            <% @week_range.each do |day| %>
+            <!-- Creates table cell. If there is a booking puts booking information -->
+            <td>
+              <% @bookings.order(created_at: :ASC).select {|b| b.date_in.to_date == day}.each do |booking| %>
+                <% if i >= booking.date_in.strftime("%H.%M").to_f && i < booking.date_out.strftime("%H.%M").to_f %>
+
+                <% bookingDescription = booking.description %>
+                <div class="booking" style="background-color: <%= booking.room.color %>"><%= link_to booking.description.slice(0..7), edit_booking_path(booking) %></div>
+              <% end %>
+            <% end %>
+          </td>
+        <% end %>
+        <!-- if statement to show correct time in left column -->
+        <% if i.modulo(1).round(2) == 0.45 %>
+          <% i += 0.55 %>
+        <% else %>
+          <% i += 0.15 %>
+        <% end %>
+      </tr>
+    <% end %>
+
+  </thead>
+</table>
+
+<div id="footerSlideContainer">
+  <div class="fa fa-arrow-up fa-3x" id="footerSlideButton"></div>
+  <div id="footerSlideContent">
+    <div id="footerSlideText">
+      <%= render '/bookings/form', booking: @booking %>
+    </div>
+  </div>
+</div>
