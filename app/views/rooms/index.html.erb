@@ -6,9 +6,9 @@
 <% @rooms.order(created_at: :ASC).each do |room| %>
   <p class="nameOfRoomInShow">
     <strong><%= room.name %></strong>
-    <%= link_to 'Edit', edit_room_path(room) %>
+    <%= link_to 'Edit', edit_room_path(room), :class => "editDeleteLinks" %>
     <td id="deleteRoom">
-      <%= link_to 'Delete', room, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Delete', room,:class => "editDeleteLinks", method: :delete, data: { confirm: 'Are you sure?' } %>
     </td>
   </p>
 <% end %>
