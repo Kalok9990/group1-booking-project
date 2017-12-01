@@ -24,10 +24,11 @@
          <td><%= booking.description  %></td>
          <td><%= booking.date_in  %></td>
          <td><%= booking.date_out  %></td>
+         <td><%= link_to 'Edit Booking', edit_booking_path(booking) %> </td>
        </tr>
        <% end %>
    </tbody>
 </table>
 
-<%= link_to 'Edit', edit_room_path(@room) %> |
+<%= link_to 'Edit Room', edit_room_path(@room) %> |
 <%= link_to 'Back', rooms_path %>
