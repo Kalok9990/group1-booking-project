@@ -65,7 +65,7 @@ tr{
 
 table{
  margin: auto;
- margin-top: 41px;
+ margin-top: 130px;
  width:auto;
  color: black;
 }
@@ -88,12 +88,8 @@ a{
 }
 
 h1 {
- font-size: 36px;
- background-color: silver;
- border-radius: 9px;
+ font-size: 60px;
  text-align: center;
- color: white;
- border: 1px solid black;
 }
 
 form{
@@ -123,12 +119,33 @@ border: none;
   margin: 20px 0px;
 }
 
+#key{
+  margin-top: 200px;
+  float: left;
+  margin-left: 5px;
+  position: fixed;
+  width: min-content;
+}
+
+#key td{
+  height: 10px;
+}
+
+#roomtable{
+  margin-left: 120px;
+}
+
 .nameOfRoomInShow{
+<<<<<<< HEAD
  color: white;
  background-color: silver;
  font-size: 27px;
  border-radius: 12px;
  border: 1px solid black;
+=======
+ color: black;
+ font-size: 20px;
+>>>>>>> dev
  padding-left: 30px;
  margin-top: 35px;
 }
@@ -200,6 +217,7 @@ nav{
   width: 100%;
   position: fixed;
   float: left;
+  padding: 11px;
 }
 
 #notice{
@@ -209,10 +227,14 @@ nav{
 
 .spartaLogo{
   float: left;
+<<<<<<< HEAD
   height: 50px;
   margin-top: 7px;
   margin-left: 7px;
   width: 145px;
+=======
+  margin-left: 8px;
+>>>>>>> dev
 }
 
 #time {
@@ -239,6 +261,7 @@ a {
   color: black;
 }
 
+<<<<<<< HEAD
 .bookingDiv{
   display: inherit;
   height: inherit;
@@ -251,6 +274,10 @@ a {
   background-color: #ffffffa6;
   padding: 6px;
   border-radius: 8px;
+=======
+.booking a{
+  background-color: white;
+>>>>>>> dev
 }
 
 #month {
@@ -260,10 +287,11 @@ a {
 }
 
 #weekTime {
+  background-color: white;
   position: fixed;
   text-align: center;
   margin: auto;
-  top: 70px;
+  top: 90px;
   z-index: 1;
   float: right;
   width: 100%;

@@ -1,5 +1,16 @@
 <p id="notice"><%= notice %></p>
 
+<table id="key" class=".table-bordered">
+<tr>
+  <td>Key:</td>
+</tr>
+<% @rooms.each do |room| %>
+  <tr>
+    <td style="background-color: <%= room.color %>"></td>
+    <td><%= room.name %></td>
+  </tr>
+<% end %>
+</table>
 
 <div id = "weekTime">
 
@@ -7,7 +18,7 @@
     <%= link_to "Previous Month <--", start_date: @week_range.first - 31.day %>
     <%= link_to "Previous Week <--", start_date: @week_range.first - 7.day %>
     <% @date_range.each do |day| %>
-      <a id="month"><%= I18n.t("date.month_names")[day.month] %> <%= day.beginning_of_week %></a>
+      <a id="month"><%= I18n.t("date.month_names")[day.month] %></a>
       <% end %>
     <%= link_to "--> Next Week", start_date: @week_range.last + 7.day %>
     <%= link_to "--> Next Month", start_date: @week_range.last + 31.day %>
@@ -37,7 +48,11 @@
                 <% if i >= booking.date_in.strftime("%H.%M").to_f && i < booking.date_out.strftime("%H.%M").to_f %>
 
                 <% bookingDescription = booking.description %>
+<<<<<<< HEAD
                 <div class="bookingDiv" style="background-color: <%= booking.room.color %>"><%= link_to booking.description, edit_booking_path(booking) %></div>
+=======
+                <div class="booking" style="background-color: <%= booking.room.color %>"><%= link_to booking.description.slice(0..7), edit_booking_path(booking) %></div>
+>>>>>>> dev
               <% end %>
             <% end %>
           </td>
