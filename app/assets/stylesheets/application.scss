@@ -186,9 +186,14 @@ footer{
 }
 
 .navbar1{
-  margin: 25px;
   color: black;
   float: left;
+  font-weight: bold;
+  margin: 25px 0 0 15px;
+}
+.navbar-fixed-top {
+  background-color: #b1b1b1fa;
+  height: 69px;
 }
 
 nav{
@@ -204,6 +209,10 @@ nav{
 
 .spartaLogo{
   float: left;
+  height: 50px;
+  margin-top: 7px;
+  margin-left: 7px;
+  width: 145px;
 }
 
 #time {
