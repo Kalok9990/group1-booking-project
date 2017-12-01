@@ -48,7 +48,7 @@
                 <% if i >= booking.date_in.strftime("%H.%M").to_f && i < booking.date_out.strftime("%H.%M").to_f %>
 
                 <% bookingDescription = booking.description %>
-                <div class="booking" style="background-color: <%= booking.room.color %>"><%= link_to booking.description.slice(0..4), edit_booking_path(booking) %></div>
+                <div class="booking" style="background-color: <%= booking.room.color %>"><%= link_to booking.description.slice(0..7), edit_booking_path(booking) %></div>
               <% end %>
             <% end %>
           </td>
