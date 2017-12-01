@@ -1,5 +1,16 @@
 <p id="notice"><%= notice %></p>
 
+<table id="key" class=".table-bordered">
+<tr>
+  <td>Key:</td>
+</tr>
+<% @rooms.each do |room| %>
+  <tr>
+    <td style="background-color: <%= room.color %>"></td>
+    <td><%= room.name %></td>
+  </tr>
+<% end %>
+</table>
 
 <div id = "weekTime">
 
@@ -37,7 +48,7 @@
                 <% if i >= booking.date_in.strftime("%H.%M").to_f && i < booking.date_out.strftime("%H.%M").to_f %>
 
                 <% bookingDescription = booking.description %>
-                <div class="booking" style="background-color: <%= booking.room.color %>"><%= link_to booking.description, edit_booking_path(booking) %></div>
+                <div class="booking" style="background-color: <%= booking.room.color %>"><%= link_to booking.description.slice(0..7), edit_booking_path(booking) %></div>
               <% end %>
             <% end %>
           </td>
