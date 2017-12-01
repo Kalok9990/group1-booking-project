@@ -3,7 +3,7 @@
 
 <div id = "time">
 
-  <tr>
+  <tr id ="time">
     <td class="change"><%= link_to "Back 7 days", start_date: @week_range.first - 7.day %></td>
     <td class="change"><%= link_to "Forward 7 days", start_date: @week_range.last + 7.day %></td>
   </tr>
